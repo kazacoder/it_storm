@@ -9,12 +9,13 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {path: '', component: MainComponent, title: 'Главная'},
+      {path: '', loadChildren: () => import('./views/user/user.module').then(m => m.UserModule)},
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
