@@ -3,9 +3,33 @@ html, body {
   padding: 0;
   font-family: Montserrat, sans-serif;
   font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+body {
+
 }
 
 .container {
   max-width: $container-width;
   margin: 0 auto;
 }
+
+.button {
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  background-color: $blue-text-color;
+  border: none;
+  border-radius: 5px;
+  color: #FFFFFF;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
