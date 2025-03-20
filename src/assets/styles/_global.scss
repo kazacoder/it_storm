@@ -13,9 +13,6 @@ html, body {
 
 .button {
   font-family: Montserrat, sans-serif;
-  font-weight: 500;
-  font-size: 12px;
-  padding: 10px 20px;
   box-sizing: border-box;
   background-color: $blue-text-color;
   border: none;
@@ -24,6 +21,18 @@ html, body {
   cursor: pointer;
   &:hover {
     opacity: 0.9;
+  }
+
+  &.button-small {
+    padding: 10px 20px;
+    font-weight: 500;
+    font-size: 12px;
+  }
+
+  &.button-big {
+    padding: 15px 33px;
+    font-weight: 400;
+    font-size: 16px;
   }
 }
 
