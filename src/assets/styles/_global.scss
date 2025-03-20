@@ -23,6 +23,12 @@ html, body {
     opacity: 0.9;
   }
 
+  &:disabled {
+    background: gray;
+    cursor: not-allowed;
+    opacity: 1;
+  }
+
   &.button-small {
     padding: 10px 20px;
     font-weight: 500;

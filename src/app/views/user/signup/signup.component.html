@@ -1,4 +1,4 @@
-<div class="signup">
+<div class="signup" [formGroup]="signupForm">
   <div class="container">
 
     <div class="auth-form">
@@ -6,16 +6,43 @@
 
       <div class="auth-inputs">
         <div class="auth-input">
-          <input type="text" placeholder="Ваше имя">
+          <input type="text" placeholder="Ваше имя" formControlName="name">
+          <div class="auth-input-error"
+               *ngIf="signupForm.get('name')?.invalid
+               && (signupForm.get('name')?.dirty || signupForm.get('name')?.touched)">
+            <span *ngIf="signupForm.get('name')?.errors?.['pattern']">
+              Допустимы русские буквы, слова разделены пробелом.
+              <br>
+              Каждое слово с Заглавной буквы.
+            </span>
+            <span *ngIf="signupForm.get('name')?.errors?.['required']">Заполните поле</span>
+          </div>
         </div>
         <div class="auth-input">
-          <input type="text" placeholder="Электронная почта">
+          <input type="text" placeholder="Электронная почта" formControlName="email">
+          <div class="auth-input-error"
+               *ngIf="signupForm.get('email')?.invalid
+               && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)">
+            Введите корректный адрес электронной почты
+          </div>
         </div>
         <div class="auth-input">
-          <input type="password" placeholder="Пароль">
+          <input type="password" placeholder="Пароль" formControlName="password">
+          <div class="auth-input-error"
+               *ngIf="signupForm.get('password')?.invalid
+               && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)">
+            <span *ngIf="signupForm.get('password')?.errors?.['pattern']">
+              Минимальная длина 8 символов.
+              <br>
+              Допустимы латинские буквы, цифры.
+              <br>
+              Как минимум 1 цифра и 1 буква в ВЕРХНЕМ регистре.
+            </span>
+            <span *ngIf="signupForm.get('password')?.errors?.['required']">Заполните поле</span>
+          </div>
         </div>
         <div class="auth-checkbox">
-          <input type="checkbox" id="remember">
+          <input type="checkbox" id="remember" formControlName="agree">
           <label for="remember">
             Я принимаю <a href="#">условия пользовательского соглашения</a>
             и даю <a href="#">согласие на обработку персональных данных</a>.
@@ -23,7 +50,7 @@
         </div>
       </div>
       <div class="auth-buttons">
-        <button class="button button-big">Зарегистрироваться</button>
+        <button class="button button-big" [disabled]="signupForm.invalid" (click)="signup()">Зарегистрироваться</button>
       </div>
       <div class="auth-link">
         Уже есть аккаунт? <a routerLink="/login">Войдите</a>

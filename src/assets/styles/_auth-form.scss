@@ -18,6 +18,14 @@
 
     .auth-input {
 
+      .auth-input-error {
+        color: red;
+        font-size: 14px;
+        margin-left: 18px;
+        margin-top: 5px;
+        max-width: 422px;
+      }
+
       input {
         width: 422px;
         box-sizing: border-box;
