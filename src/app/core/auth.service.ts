@@ -4,7 +4,6 @@ import {HttpClient} from "@angular/common/http";
 import {DefaultResponseType} from "../../types/default-response.type";
 import {LoginResponseType} from "../../types/login-response.type";
 import {environment} from "../../environments/environment";
-import {UserService} from "../shared/services/user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +24,11 @@ export class AuthService {
   login(email: string, password: string, rememberMe: boolean): Observable<DefaultResponseType | LoginResponseType> {
     return this.http.post<DefaultResponseType | LoginResponseType>(environment.api + 'login',
       {email, password, rememberMe})
+  }
+
+  signup(name: string, email: string, password: string): Observable<DefaultResponseType | LoginResponseType> {
+    return this.http.post<DefaultResponseType | LoginResponseType>(environment.api + 'signup',
+      {name, email, password})
   }
 
   logout() {
