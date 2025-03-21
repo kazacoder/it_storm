@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Subject} from "rxjs";
+import {Observable, Subject, throwError} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {DefaultResponseType} from "../../types/default-response.type";
+import {LoginResponseType} from "../../types/login-response.type";
+import {environment} from "../../environments/environment";
+import {UserService} from "../shared/services/user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +22,62 @@ export class AuthService {
     this.isLogged = !!localStorage.getItem(this.accessTokenKey);
   }
 
-  login() {
+  login(email: string, password: string, rememberMe: boolean): Observable<DefaultResponseType | LoginResponseType> {
+    return this.http.post<DefaultResponseType | LoginResponseType>(environment.api + 'login',
+      {email, password, rememberMe})
+  }
+
+  logout() {
+    const tokens = this.getTokens();
+    if (tokens && tokens.refreshToken) {
+      this.http.post<DefaultResponseType>(environment.api + 'logout',
+        {refreshToken: tokens.refreshToken},)
+    }
+    this.removeTokens();
+    this.userId = null;
+  }
+
+  refresh(): Observable<DefaultResponseType | LoginResponseType> {
+    const tokens = this.getTokens();
+    if (tokens && tokens.refreshToken) {
+      return this.http.post<DefaultResponseType | LoginResponseType>(environment.api + 'refresh', {
+        refreshToken: tokens.refreshToken,
+      })
+    }
+    throw throwError(() => "Can't find the tokens" );
+  }
+
+  getIsLoggedIn() {
+    return this.isLogged;
+  }
+
+  setTokens(accessTokens: string, refreshTokens: string): void {
+    localStorage.setItem(this.accessTokenKey, accessTokens);
+    localStorage.setItem(this.refreshTokenKey, refreshTokens);
+    this.isLogged = true;
+    this.isLogged$.next(true);
+  }
+
+  removeTokens(): void {
+    localStorage.removeItem(this.accessTokenKey);
+    localStorage.removeItem(this.refreshTokenKey);
+    this.isLogged = false;
+    this.isLogged$.next(false);
+  }
+
+  getTokens(): { accessToken: string | null, refreshToken: string | null } {
+    return {
+      accessToken: localStorage.getItem(this.accessTokenKey),
+      refreshToken: localStorage.getItem(this.refreshTokenKey),
+    };
+  }
+
+  set userId(id: string | null) {
+    if (id) {
+      localStorage.setItem(this.userIdKey, id);
+    } else {
+      localStorage.removeItem(this.userIdKey);
+    }
   }
 
 }

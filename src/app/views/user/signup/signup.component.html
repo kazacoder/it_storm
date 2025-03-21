@@ -6,7 +6,10 @@
 
       <div class="auth-inputs">
         <div class="auth-input">
-          <input type="text" placeholder="Ваше имя" formControlName="name">
+          <input type="text"
+                 [ngStyle]="{'border-color': signupForm.get('name')?.invalid
+                 && (signupForm.get('name')?.dirty || signupForm.get('name')?.touched) ? 'red': ''}"
+                 placeholder="Ваше имя" formControlName="name">
           <div class="auth-input-error"
                *ngIf="signupForm.get('name')?.invalid
                && (signupForm.get('name')?.dirty || signupForm.get('name')?.touched)">
@@ -19,7 +22,10 @@
           </div>
         </div>
         <div class="auth-input">
-          <input type="text" placeholder="Электронная почта" formControlName="email">
+          <input type="text"
+                 [ngStyle]="{'border-color': signupForm.get('email')?.invalid
+                 && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched) ? 'red': ''}"
+                 placeholder="Электронная почта" formControlName="email">
           <div class="auth-input-error"
                *ngIf="signupForm.get('email')?.invalid
                && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)">
@@ -27,7 +33,10 @@
           </div>
         </div>
         <div class="auth-input">
-          <input type="password" placeholder="Пароль" formControlName="password">
+          <input type="password"
+                 [ngStyle]="{'border-color': signupForm.get('password')?.invalid
+                 && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched) ? 'red': ''}"
+                 placeholder="Пароль" formControlName="password">
           <div class="auth-input-error"
                *ngIf="signupForm.get('password')?.invalid
                && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)">

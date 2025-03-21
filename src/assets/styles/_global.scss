@@ -42,3 +42,12 @@ html, body {
   }
 }
 
+.mat-menu-item {
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+
+  a {
+    text-decoration: none;
+    color: $gray-text-color;
+  }
+}

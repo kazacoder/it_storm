@@ -5,6 +5,7 @@ info:
 servers:
   - url: http://185.155.17.105:3031
   - url: http://192.168.0.162:3031
+  - url: http://localhost:3000
 tags:
   - name: Auth
   - name: Category
