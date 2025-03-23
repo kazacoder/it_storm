@@ -76,6 +76,20 @@
                   "with": "src/environments/environment.remote.ts"
                 }
               ]
+            },
+            "home": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.home.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -91,6 +105,9 @@
             },
             "remote": {
               "browserTarget": "it_storm:build:remote"
+            },
+            "home": {
+              "browserTarget": "it_storm:build:home"
             }
           },
           "defaultConfiguration": "development"

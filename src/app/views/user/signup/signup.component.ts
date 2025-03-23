@@ -7,6 +7,9 @@ import {AuthService} from "../../../core/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserService} from "../../../shared/services/user.service";
 import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {DialogComponent} from "../../components/dialog/dialog.component";
+import {ViewportScroller} from "@angular/common";
 
 @Component({
   selector: 'app-signup',
@@ -26,7 +29,9 @@ export class SignupComponent implements OnInit {
               private authService: AuthService,
               private _matSnackBar: MatSnackBar,
               private userService: UserService,
-              private router: Router,) { }
+              private router: Router,
+              private dialog: MatDialog,
+              private viewportScroller: ViewportScroller) { }
 
   ngOnInit(): void {
   }
@@ -69,6 +74,19 @@ export class SignupComponent implements OnInit {
           }
         }
       })
+    }
+  }
+
+  openDialog(anchor?: string | null) {
+    const dialogRef = this.dialog.open(DialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.signupForm.patchValue({agree: result});
+      }
+    })
+    if (anchor) {
+      // this.viewportScroller.scrollToAnchor(anchor); ?? doesn't work
+      document.getElementById(anchor)!.scrollIntoView({behavior: 'smooth'});
     }
   }
 
