@@ -51,11 +51,20 @@
           </div>
         </div>
         <div class="auth-checkbox">
-          <input type="checkbox" id="remember" formControlName="agree">
+          <input type="checkbox"
+                 [ngStyle]="{filter: signupForm.get('agree')?.invalid
+                 && (signupForm.get('agree')?.dirty || signupForm.get('agree')?.touched) ?
+                 'invert(85%) sepia(83%) saturate(6726%) hue-rotate(360deg) brightness(111%) contrast(111%)' : 'none'}"
+                 id="remember" formControlName="agree">
           <label>
             Я принимаю <a (click)="openDialog()">условия пользовательского соглашения</a>
             и даю <a (click)="openDialog('agree')">согласие на обработку персональных данных</a>.
           </label>
+        </div>
+        <div class="auth-checkbox-error"
+             *ngIf="signupForm.get('agree')?.invalid
+               && (signupForm.get('agree')?.dirty || signupForm.get('agree')?.touched)">
+          Необходимо принять условия.
         </div>
       </div>
       <div class="auth-buttons">
