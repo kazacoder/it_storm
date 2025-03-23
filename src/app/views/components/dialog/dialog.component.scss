@@ -7,6 +7,10 @@
 }
 
 .policy-content {
+  h3 {
+    color: $blue-text-color;
+  }
+
   line-height: 1.3;
   ol {
     padding-left: 20px;

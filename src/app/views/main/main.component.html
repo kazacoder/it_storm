@@ -1,18 +1,177 @@
 <section class="banners">
   <div class="container">
-    <p>Баннеры</p>
+    <owl-carousel-o [options]="bannersOwlOptions" class="carousel">
+      <ng-container>
+        <ng-template carouselSlide>
+          <div class="banners-item">
+            <div class="banners-item-block">
+              <div class="banners-item-block-title">Предложение месяца</div>
+              <div class="banners-item-content">
+                <div class="banners-item-content-title">
+                  Продвижение в Instagram для вашего бизнеса <span>-15%</span>!
+                </div>
+              </div>
+              <button class="button button-big">Подробнее</button>
+            </div>
+            <div class="banners-item-image">
+              <img src="/assets/images/page/main/banners/slide1.jpg" alt="">
+            </div>
+          </div>
+        </ng-template>
+        <ng-template carouselSlide>
+          <div class="banners-item">
+            <div class="banners-item-block">
+              <div class="banners-item-block-title">Акция</div>
+              <div class="banners-item-content">
+                <div class="banners-item-content-title">
+                  Нужен грамотный <span>копирайтер</span>?
+                </div>
+                <div class="banners-item-content-text">
+                  Весь декабрь у нас действует акция на работу копирайтера.
+                </div>
+              </div>
+              <button class="button button-big">Подробнее</button>
+            </div>
+            <div class="banners-item-image">
+              <img src="/assets/images/page/main/banners/slide2.jpg" alt="">
+            </div>
+          </div>
+        </ng-template>
+        <ng-template carouselSlide>
+          <div class="banners-item">
+            <div class="banners-item-block">
+              <div class="banners-item-block-title">Предложение месяца</div>
+              <div class="banners-item-content">
+                <div class="banners-item-content-title">
+                  <span>6 место</span> в ТОП-10 SMM-агенств Москвы!
+                </div>
+                <div class="banners-item-content-text">
+                  Мы благодарим каждого, кто голосовал за нас!
+                </div>
+              </div>
+              <button class="button button-big">Подробнее</button>
+            </div>
+            <div class="banners-item-image">
+              <img src="/assets/images/page/main/banners/slide3.jpg" alt="">
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
   </div>
 </section>
 
 <section class="services" id="services">
   <div class="container">
-    <p>Услуги</p>
+    <div class="services-title">Услуги, которые мы предлагаем</div>
+    <div class="services-items">
+      <div class="services-item">
+        <div class="services-item-image">
+          <img src="/assets/images/page/main/services/service1.png" alt="service 1 image">
+        </div>
+        <div class="services-item-title">Создание сайтов</div>
+        <div class="services-item-content">
+          В краткие сроки мы создадим качественный и самое главное продающий сайт для продвижения Вашего бизнеса!
+        </div>
+        <div class="services-item-footer">
+          <div class="services-item-price">От 7 500₽</div>
+          <button class="button button-small">Подробнее</button>
+        </div>
+      </div>
+      <div class="services-item">
+        <div class="services-item-image">
+          <img src="/assets/images/page/main/services/service2.png" alt="service 2 image">
+        </div>
+        <div class="services-item-title">Продвижение</div>
+        <div class="services-item-content">
+          Вам нужен качественный SMM-специалист или грамотный таргетолог? Мы готовы оказать Вам услугу “Продвижения”
+          на наивысшем уровне!
+        </div>
+        <div class="services-item-footer">
+          <div class="services-item-price">От 3 500₽</div>
+          <button class="button button-small">Подробнее</button>
+        </div>
+      </div>
+      <div class="services-item">
+        <div class="services-item-image">
+          <img src="/assets/images/page/main/services/service3.png" alt="service 3 image">
+        </div>
+        <div class="services-item-title">Реклама</div>
+        <div class="services-item-content">
+          Без рекламы не может обойтись ни один бизнес или специалист. Обращаясь к нам, мы гарантируем быстрый прирост
+          клиентов за счёт правильно настроенной рекламы.
+        </div>
+        <div class="services-item-footer">
+          <div class="services-item-price">От 1 000₽</div>
+          <button class="button button-small">Подробнее</button>
+        </div>
+      </div>
+      <div class="services-item">
+        <div class="services-item-image">
+          <img src="/assets/images/page/main/services/service4.png" alt="service 4 image">
+        </div>
+        <div class="services-item-title">Копирайтинг</div>
+        <div class="services-item-content">
+          Наши копирайтеры готовы написать Вам любые продающие текста, которые не только обеспечат рост охватов, но и
+          помогут выйти на новый уровень в продажах.
+        </div>
+        <div class="services-item-footer">
+          <div class="services-item-price">От 750₽</div>
+          <button class="button button-small">Подробнее</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="about" id="about">
   <div class="container">
-    <p>О нас</p>
+    <div class="about-image" style="background-image: url('../../../assets/images/page/main/about.jpg')">
+    </div>
+    <div class="about-info">
+      <div class="about-info-title">Кто мы и чем мы занимаемся?</div>
+      <div class="about-info-content">
+        <span>АйтиШторм</span> — это ваш помощник №1 при решении таких вопросов, как продвижение в сети, разработка
+        сайтов для
+        бизнеса и личного бренда, сторисмейкинг, копирайтинг, маркетинг, разработка визуальной концепции и создание
+        инфопродуктов. Компания была основана в 2019 году и за всё это время смогла выйти в ТОП-10 агенств, предлагающих
+        услуги продвижения в сети.
+      </div>
+      <div class="about-info-advantages">
+        <div class="about-info-advantages-title">Наши преимущества</div>
+        <div class="about-info-advantages-items">
+          <div class="about-info-advantages-item">
+            <div class="about-info-advantages-item-number">1</div>
+            <div class="about-info-advantages-item-text">
+              <span>Мастерски вовлекаем аудиторию в процесс.</span> Мы увеличиваем процент
+              вовлечённости за короткий промежуток времени.
+            </div>
+          </div>
+          <div class="about-info-advantages-item">
+            <div class="about-info-advantages-item-number">2</div>
+            <div class="about-info-advantages-item-text">
+              <span>Разрабатываем бомбическую визуальную концепцию.</span> Наши специалисты знают как создать уникальный
+              образ
+              вашего проекта.
+            </div>
+          </div>
+          <div class="about-info-advantages-item">
+            <div class="about-info-advantages-item-number">3</div>
+            <div class="about-info-advantages-item-text">
+              <span>Создаём мощные воронки с помощью текстов.</span> Наши копирайтеры создают не только вкусные текста,
+              но и классные воронки.
+            </div>
+          </div>
+          <div class="about-info-advantages-item">
+            <div class="about-info-advantages-item-number">4</div>
+            <div class="about-info-advantages-item-text">
+              <span>Помогаем продавать больше.</span> Мы не только помогаем разработать стратегию по продажам, но также
+              корректируем её под нужды заказчика.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 

@@ -14,6 +14,7 @@ import {AuthInterceptor} from "./core/auth.interceptor";
 import {MatMenuModule} from "@angular/material/menu";
 import { DialogComponent } from './views/components/dialog/dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {CarouselModule} from "ngx-owl-carousel-o";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     HeaderComponent,
     FooterComponent,
     MainComponent,
-    DialogComponent
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +33,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     BrowserAnimationsModule,
     MatMenuModule,
     MatDialogModule,
+    CarouselModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
