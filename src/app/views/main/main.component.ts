@@ -14,14 +14,11 @@ export class MainComponent implements OnInit {
     touchDrag: true,
     pullDrag: false,
     dots: true,
+
     navSpeed: 700,
     margin: 0,
-    navText: [
-      "<img src='../../../assets/images/previous.png' alt='prev img'>",
-      "<img src='../../../assets/images/next.png' alt='next img'>"
-    ],
     items: 1,
-    nav: true
+    nav: false
   }
 
   constructor() { }

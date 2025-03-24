@@ -1,6 +1,14 @@
 <section class="banners">
   <div class="container">
-    <owl-carousel-o [options]="bannersOwlOptions" class="carousel">
+    <div class="banners-arrows">
+      <a (click)="bannerCar.prev()" class="move-backward">
+        <img src="/assets/images/previous.png" alt="prev arrow">
+      </a>
+      <a (click)="bannerCar.next()" class="move-forward">
+        <img src="/assets/images/next.png" alt="prev arrow">
+      </a>
+    </div>
+    <owl-carousel-o [options]="bannersOwlOptions" class="carousel" #bannerCar>
       <ng-container>
         <ng-template carouselSlide>
           <div class="banners-item">

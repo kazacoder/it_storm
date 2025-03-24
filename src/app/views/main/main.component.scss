@@ -3,6 +3,30 @@
 
 .banners {
   .container {
+    position: relative;
+
+
+    .banners-arrows {
+      position: absolute;
+      top: 232px;
+      z-index: 3;
+      width: 100%;
+
+      a {
+        cursor: pointer;
+      }
+
+      .move-forward {
+        position: absolute;
+        right: 10px;
+      }
+
+      .move-backward {
+        position: absolute;
+        left: 10px;
+      }
+    }
+
     .banners-item {
       position: relative;
       height: 500px;
