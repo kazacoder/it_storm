@@ -72,3 +72,27 @@ html, body {
     }
   }
 }
+
+.input, .auth-input {
+  input {
+    width: 422px;
+    box-sizing: border-box;
+    padding: 16px 18px;
+    background: #FFFFFF;
+    border: 2px solid $blue-text-color;
+    border-radius: 3px;
+    outline: none;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+
+    &::placeholder {
+      color: #A8ABA7;
+    }
+
+    &:disabled {
+      color: $blue-text-color;
+    }
+  }
+}
+

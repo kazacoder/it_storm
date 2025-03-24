@@ -81,22 +81,28 @@ export class MainComponent implements OnInit {
   }
 
 
-  openDialog() {
+  openDialog(type: 'consult' | 'service', service?: 'Создание сайтов' | 'Продвижение' | 'Реклама' | 'Копирайтинг') {
 
     const dialogRef = this.dialog.open(CommonDialogComponent, {
       width: '727px',
       height: '489px',
       data: {
-        title: 'Заявка на услугу',
-        service: '',
-        typeThanks: false,
+        title: service ? 'Заявка на услугу' : 'Закажите бесплатную консультацию!',
+        service: service,
+        type: type,
         btnText: 'Оставить заявку',
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-
+      if (result) {
+        this.dialog.open(CommonDialogComponent, {
+          width: '727px',
+          height: '489px',
+          data: {
+            type: 'thanks',
+          }
+        });
+      }
     })
-
   }
-
 }

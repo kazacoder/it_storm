@@ -20,6 +20,7 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 import { CommonDialogComponent } from './views/components/common-dialog/common-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
 import {ReactiveFormsModule} from "@angular/forms";
+import {NgxMaskModule} from "ngx-mask";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatDialogModule,
     CarouselModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},

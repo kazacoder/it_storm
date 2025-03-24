@@ -1,28 +1,44 @@
 <div class="common-dialog">
 
-<div class="common-dialog-actions">
-<button class="dialog-close-button" aria-label="Закрыть" mat-dialog-close>
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <line x1="0.935622" y1="0.649902" x2="12.9564" y2="12.6707" stroke="#BEBEBE" stroke-linecap="round"/>
-    <line x1="12.9236" y1="0.629714" x2="0.902769" y2="12.6505" stroke="#BEBEBE" stroke-linecap="round"/>
-  </svg>
-</button>
-</div>
-
-  <div class="common-dialog-title">
-    {{ data.title }}
+  <div class="common-dialog-actions">
+    <button class="dialog-close-button" aria-label="Закрыть" mat-dialog-close>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0.935622" y1="0.649902" x2="12.9564" y2="12.6707" stroke="#BEBEBE" stroke-linecap="round"/>
+        <line x1="12.9236" y1="0.629714" x2="0.902769" y2="12.6505" stroke="#BEBEBE" stroke-linecap="round"/>
+      </svg>
+    </button>
   </div>
-
-  <div class="auth-inputs">
-    <div class="auth-input">
-      <input type="text" placeholder="Электронная почта">
+  <div class="common-dialog-wrapper">
+    <div *ngIf="data.type === 'service' || data.type === 'consult'">
+      <div class="common-dialog-title">
+        {{ data.title }}
+      </div>
+      <div class="common-dialog-inputs inputs">
+        <div class="input" *ngIf="data.type === 'service'">
+          <input type="text" disabled placeholder="Услуга" [value]="data.service">
+        </div>
+        <div class="input">
+          <input type="text" placeholder="Ваше имя">
+        </div>
+        <div class="input">
+          <input type="text" placeholder="Ваш номер телефона" prefix="+7 " mask="(000) 000-0000" [validation]="true">
+        </div>
+      </div>
+      <div class="common-dialog-buttons" *ngIf="data.type === 'service' || data.type === 'consult'">
+        <button class="button button-big" [mat-dialog-close]="true">{{ data.btnText }}</button>
+      </div>
     </div>
-    <div class="auth-input">
-      <input type="text" placeholder="Электронная почта">
+    <div *ngIf="data.type !== 'service' && data.type !== 'consult'">
+      <div class="common-dialog-title done">
+        Спасибо за вашу заявку!
+      </div>
+      <div class="common-dialog-text">
+        Мы свяжемся с вами при первой же возможности.
+      </div>
+      <div class="common-dialog-buttons">
+        <button class="button button-small" [mat-dialog-close]="false">Окей</button>
+      </div>
     </div>
-  </div>
-  <div class="auth-buttons">
-    <button class="button button-big" (click)="openDialog()">{{ data.btnText }}</button>
   </div>
 
 </div>

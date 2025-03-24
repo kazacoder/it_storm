@@ -8,28 +8,8 @@ import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 })
 export class CommonDialogComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              private dialog: MatDialog,) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
   }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(CommonDialogComponent, {
-      width: '727px',
-      height: '489px',
-      data: {
-        title: 'Заявка на услугу',
-        service: '',
-        typeThanks: false,
-        btnText: 'Оставить заявку'
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-
-    })
-
-  }
-
-
 }

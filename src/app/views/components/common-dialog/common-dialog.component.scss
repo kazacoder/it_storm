@@ -1,15 +1,68 @@
-.common-dialog-actions {
+@import "../../../../assets/styles/variables";
 
-  display: flex;
-  justify-content: flex-end;
+.common-dialog {
 
-  .dialog-close-button {
-    border: none;
-    background: transparent;
-    margin: 8px 8px 0 0;
-    padding: 0;
-    cursor: pointer;
+  .common-dialog-actions {
 
+    display: flex;
+    justify-content: flex-end;
+
+    .dialog-close-button {
+      border: none;
+      background: transparent;
+      margin: 8px 8px 0 0;
+      padding: 0;
+      cursor: pointer;
+    }
+  }
+
+
+  .common-dialog-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    .common-dialog-title {
+      margin-top: 45px;
+      font-family: Lora, sans-serif;
+      font-weight: 400;
+      font-size: 38px;
+      line-height: 1.3;
+      color: $blue-text-color;
+      margin-bottom: 20px;
+      text-align: center;
+
+      &.done {
+        margin-top: 114px;
+      }
+    }
+
+    .common-dialog-text {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1.3;
+      text-align: center;
+      color: #1E1A2B;
+      margin-bottom: 40px;
+
+    }
+
+    .common-dialog-inputs {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 20px;
+    }
+
+    .common-dialog-buttons {
+      display: flex;
+      justify-content: center;
+      .button-big {
+        width: 422px;
+      }
+    }
   }
 }
 
