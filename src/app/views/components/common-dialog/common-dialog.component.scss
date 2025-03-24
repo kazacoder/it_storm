@@ -1,0 +1,15 @@
+.common-dialog-actions {
+
+  display: flex;
+  justify-content: flex-end;
+
+  .dialog-close-button {
+    border: none;
+    background: transparent;
+    margin: 8px 8px 0 0;
+    padding: 0;
+    cursor: pointer;
+
+  }
+}
+

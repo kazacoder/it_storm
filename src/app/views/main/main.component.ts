@@ -3,6 +3,8 @@ import {OwlOptions} from "ngx-owl-carousel-o";
 import {ArticleType} from "../../../types/article.type";
 import {ArticlesService} from "../../shared/services/articles.service";
 import {DefaultResponseType} from "../../../types/default-response.type";
+import {MatDialog} from "@angular/material/dialog";
+import {CommonDialogComponent} from "../components/common-dialog/common-dialog.component";
 
 @Component({
   selector: 'app-main',
@@ -65,7 +67,8 @@ export class MainComponent implements OnInit {
     nav: false,
   }
 
-  constructor(private articlesService: ArticlesService) { }
+  constructor(private articlesService: ArticlesService,
+              private dialog: MatDialog,) { }
 
   ngOnInit(): void {
     this.articlesService.getTopArticles()
@@ -75,6 +78,25 @@ export class MainComponent implements OnInit {
         }
         this.articles = data as ArticleType[];
       })
+  }
+
+
+  openDialog() {
+
+    const dialogRef = this.dialog.open(CommonDialogComponent, {
+      width: '727px',
+      height: '489px',
+      data: {
+        title: 'Заявка на услугу',
+        service: '',
+        typeThanks: false,
+        btnText: 'Оставить заявку',
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+    })
+
   }
 
 }

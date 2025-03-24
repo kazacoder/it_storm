@@ -19,7 +19,7 @@
                   Продвижение в Instagram для вашего бизнеса <span>-15%</span>!
                 </div>
               </div>
-              <button class="button button-big">Подробнее</button>
+              <button class="button button-big" (click)="openDialog()">Подробнее</button>
             </div>
             <div class="banners-item-image">
               <img src="/assets/images/page/main/banners/slide1.jpg" alt="">
@@ -190,7 +190,7 @@
       <article-card *ngFor="let article of articles" [article]="article"></article-card>
     </div>
     <div class="popular-articles-actions">
-      <a href="/blog">
+      <a routerLink="/blog">
         Перейти в блог
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path

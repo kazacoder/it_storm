@@ -17,6 +17,9 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {CarouselModule} from "ngx-owl-carousel-o";
 import { ArticleCardComponent } from './shared/components/article-card/article-card.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { CommonDialogComponent } from './views/components/common-dialog/common-dialog.component';
+import {MatIconModule} from "@angular/material/icon";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
     DialogComponent,
     ArticleCardComponent,
     PageNotFoundComponent,
+    CommonDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,9 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
     BrowserAnimationsModule,
     MatMenuModule,
     MatDialogModule,
-    CarouselModule
+    CarouselModule,
+    MatIconModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
