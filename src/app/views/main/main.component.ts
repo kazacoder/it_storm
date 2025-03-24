@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {OwlOptions} from "ngx-owl-carousel-o";
+import {ArticleType} from "../../../types/article.type";
+import {ArticlesService} from "../../shared/services/articles.service";
+import {DefaultResponseType} from "../../../types/default-response.type";
 
 @Component({
   selector: 'app-main',
@@ -7,6 +10,8 @@ import {OwlOptions} from "ngx-owl-carousel-o";
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+
+  articles: ArticleType[] = [];
 
   reviews = [
     {
@@ -60,9 +65,16 @@ export class MainComponent implements OnInit {
     nav: false,
   }
 
-  constructor() { }
+  constructor(private articlesService: ArticlesService) { }
 
   ngOnInit(): void {
+    this.articlesService.getTopArticles()
+      .subscribe(data => {
+        if ((data as DefaultResponseType).error !== undefined) {
+          throw new Error((data as DefaultResponseType).message)
+        }
+        this.articles = data as ArticleType[];
+      })
   }
 
 }

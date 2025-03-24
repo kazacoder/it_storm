@@ -15,6 +15,8 @@ import {MatMenuModule} from "@angular/material/menu";
 import { DialogComponent } from './views/components/dialog/dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {CarouselModule} from "ngx-owl-carousel-o";
+import { ArticleCardComponent } from './shared/components/article-card/article-card.component';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import {CarouselModule} from "ngx-owl-carousel-o";
     FooterComponent,
     MainComponent,
     DialogComponent,
+    ArticleCardComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

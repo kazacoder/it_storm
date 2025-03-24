@@ -183,87 +183,11 @@
   </div>
 </section>
 
-<section class="popular-articles">
+<section class="popular-articles" *ngIf="articles &&articles.length > 0">
   <div class="container">
     <div class="popular-articles-title">Популярные статьи из блога</div>
     <div class="popular-articles-items">
-      <div class="popular-articles-item">
-        <div class="popular-articles-item-image" style="background-image: url('/assets/images/blog/image1.jpg')">
-          <div class="popular-articles-item-category">
-            Фриланс
-          </div>
-        </div>
-        <div class="popular-articles-item-info">
-          <div class="popular-articles-item-content">
-            <div class="popular-articles-item-title">6 сайтов для повышения продуктивности</div>
-            <div class="popular-articles-item-text">
-              Хотите проводить время в сети с пользой? Наша подборка из шести полезных, но малоизвестных сайтов увеличит
-              вашу продуктивность, поможет успевать больше в течение дня и всегда быть на шаг впереди!
-            </div>
-          </div>
-        </div>
-        <div class="popular-articles-item-actions">
-          <a href="#">Читать дальше</a>
-        </div>
-      </div>
-      <div class="popular-articles-item">
-        <div class="popular-articles-item-image" style="background-image: url('/assets/images/blog/image2.jpg')">
-          <div class="popular-articles-item-category">
-            Таргет
-          </div>
-        </div>
-        <div class="popular-articles-item-info">
-          <div class="popular-articles-item-content">
-            <div class="popular-articles-item-title">Как произвести впечатление на нового клиента?</div>
-            <div class="popular-articles-item-text">
-              Поиск новых клиентов — это сложная задача не только для новичков, но и для опытных специалистов.
-              Мы расскажем, как справиться с волнением, завоевать доверие клиента и произвести на него потрясающее
-              первое впечатление.
-            </div>
-          </div>
-        </div>
-        <div class="popular-articles-item-actions">
-          <a href="#">Читать дальше</a>
-        </div>
-      </div>
-      <div class="popular-articles-item">
-        <div class="popular-articles-item-image" style="background-image: url('/assets/images/blog/image3.jpg')">
-          <div class="popular-articles-item-category">
-            Фриланс
-          </div>
-        </div>
-        <div class="popular-articles-item-info">
-          <div class="popular-articles-item-content">
-            <div class="popular-articles-item-title">Как бороться с конкуренцией на фрилансе?</div>
-            <div class="popular-articles-item-text">
-              Конкуренция — это часть нашей жизни. Мы боремся за место работы, за победу на конкурсе и даже за
-              возможность купить последний круассан в любимом кафе. Фриланс не исключение.
-            </div>
-          </div>
-        </div>
-        <div class="popular-articles-item-actions">
-          <a href="#">Читать дальше</a>
-        </div>
-      </div>
-      <div class="popular-articles-item">
-        <div class="popular-articles-item-image" style="background-image: url('/assets/images/blog/image4.jpg')">
-          <div class="popular-articles-item-category">
-            SMM
-          </div>
-        </div>
-        <div class="popular-articles-item-info">
-          <div class="popular-articles-item-content">
-            <div class="popular-articles-item-title">КSMM-специалисты: кто они?</div>
-            <div class="popular-articles-item-text">
-              Профессия SММ-менеджера набирает все большую популярность. В эпоху интернета уже не только новости –
-              приобретение товаров и услуг уходит в онлайн, а просмотр любимых сайтов становится ежедневной рутиной.
-            </div>
-          </div>
-        </div>
-        <div class="popular-articles-item-actions">
-          <a href="#">Читать дальше</a>
-        </div>
-      </div>
+      <article-card *ngFor="let article of articles" [article]="article"></article-card>
     </div>
     <div class="popular-articles-actions">
       <a href="/blog">

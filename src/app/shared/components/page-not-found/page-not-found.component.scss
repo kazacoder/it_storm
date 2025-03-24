@@ -1,0 +1,37 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/fonts";
+
+.page-not-found {
+  margin-bottom: 120px;
+  margin-top: 120px;
+
+  .container {
+
+    .page-not-found-title {
+      font-family: Lora, serif;
+      font-weight: 500;
+      font-size: 72px;
+      color: $blue-text-color;
+    }
+
+    .page-not-found-text {
+      margin-top: 20px;
+      font-weight: 400;
+      font-size: 32px;
+      color: $gray-text-color;
+    }
+
+    .page-not-found-links {
+      margin-top: 20px;
+
+      display: flex;
+      gap: 20px;
+
+      a {
+        color: $blue-text-color;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+}
