@@ -120,6 +120,14 @@
 
       .services-item {
         width: 291px;
+
+        &-image {
+          transition: all .3s ease-in-out;
+        }
+
+        &:hover .services-item-image {
+          transform: scale(1.05);
+        }
       }
 
       .services-item-title {

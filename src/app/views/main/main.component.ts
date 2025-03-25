@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {OwlOptions} from "ngx-owl-carousel-o";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {CarouselComponent, OwlOptions} from "ngx-owl-carousel-o";
 import {ArticleType} from "../../../types/article.type";
 import {ArticlesService} from "../../shared/services/articles.service";
 import {DefaultResponseType} from "../../../types/default-response.type";
@@ -15,6 +15,7 @@ export class MainComponent implements OnInit {
 
   articles: ArticleType[] = [];
   reviews = reviews;
+  @ViewChild('bannerCar') bannerCar: CarouselComponent | undefined
 
   bannersOwlOptions: OwlOptions = {
     loop: true,
@@ -25,7 +26,11 @@ export class MainComponent implements OnInit {
     navSpeed: 700,
     margin: 0,
     items: 1,
-    nav: false
+    nav: false,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    autoplayTimeout: 5000,
+    autoplayHoverPause: true,
   }
 
   reviewsOwlOptions: OwlOptions = {
@@ -57,7 +62,10 @@ export class MainComponent implements OnInit {
   openDialog(type: 'consult' | 'service', service?: 'Создание сайтов' | 'Продвижение' | 'Реклама' | 'Копирайтинг') {
     const dialogConfig = dialogConfigs[type]
     dialogConfig.data.service = service ? service : ''
-    this.dialog.open(CommonDialogComponent, dialogConfig);
+    this.dialog.open(CommonDialogComponent, dialogConfig).afterClosed().subscribe(() => {
+      this.bannerCar?.startAutoplay()
+    });
+    this.bannerCar?.stopAutoplay()
   }
 }
 
