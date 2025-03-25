@@ -1,5 +1,4 @@
 <div class="common-dialog">
-
   <div class="common-dialog-actions">
     <button class="dialog-close-button" aria-label="Закрыть" mat-dialog-close>
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -10,25 +9,29 @@
   </div>
   <div class="common-dialog-wrapper">
     <div *ngIf="data.type === 'service' || data.type === 'consult'">
-      <div class="common-dialog-title">
-        {{ data.title }}
-      </div>
+      <div class="common-dialog-title">{{ data.title }}</div>
       <div class="common-dialog-inputs inputs">
         <div class="input" *ngIf="data.type === 'service'">
           <input type="text" disabled placeholder="Услуга" [value]="data.service">
         </div>
         <div class="input">
-          <input type="text" placeholder="Ваше имя">
+          <input type="text" name="name" #name=ngModel [(ngModel)]="formValues.name" required placeholder="Ваше имя"
+                 [ngStyle]="{'border-color': name.invalid && (name.touched || name.dirty) ? 'red' : ''}">
         </div>
         <div class="input">
-          <input type="text" placeholder="Ваш номер телефона" prefix="+7 " mask="(000) 000-0000" [validation]="true">
+          <input type="text" name="phone" #phone="ngModel" [(ngModel)]="formValues.phone" required
+                 placeholder="Ваш номер телефона" prefix="+7 " mask="(000) 000-0000"
+                 [ngStyle]="{'border-color': phone.invalid && (phone.touched || phone.dirty) ? 'red' : ''}">
         </div>
       </div>
       <div class="common-dialog-buttons" *ngIf="data.type === 'service' || data.type === 'consult'">
-        <button class="button button-big" [mat-dialog-close]="true">{{ data.btnText }}</button>
+        <button class="button button-big" [disabled]="name.invalid || phone.invalid"
+                [mat-dialog-close]="true" (click)="proceedBtn(data.service)">{{ data.btnText }}
+        </button>
       </div>
     </div>
-    <div *ngIf="data.type !== 'service' && data.type !== 'consult'">
+    <!--  Done dialog  -->
+    <div *ngIf="data.type === 'done'">
       <div class="common-dialog-title done">
         Спасибо за вашу заявку!
       </div>
@@ -36,11 +39,10 @@
         Мы свяжемся с вами при первой же возможности.
       </div>
       <div class="common-dialog-buttons">
-        <button class="button button-small" [mat-dialog-close]="false">Окей</button>
+        <button class="button button-small" mat-dialog-close>Окей</button>
       </div>
     </div>
   </div>
-
 </div>
 
 

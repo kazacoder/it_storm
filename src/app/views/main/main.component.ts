@@ -4,7 +4,7 @@ import {ArticleType} from "../../../types/article.type";
 import {ArticlesService} from "../../shared/services/articles.service";
 import {DefaultResponseType} from "../../../types/default-response.type";
 import {MatDialog} from "@angular/material/dialog";
-import {CommonDialogComponent} from "../components/common-dialog/common-dialog.component";
+import {CommonDialogComponent, dialogConfigs} from "../components/common-dialog/common-dialog.component";
 
 @Component({
   selector: 'app-main',
@@ -14,34 +14,7 @@ import {CommonDialogComponent} from "../components/common-dialog/common-dialog.c
 export class MainComponent implements OnInit {
 
   articles: ArticleType[] = [];
-
-  reviews = [
-    {
-      image: '1.jpg',
-      name: 'Станислав',
-      text: 'Спасибо огромное АйтиШторму за прекрасный блог с полезными статьями! Именно они и побудили меня углубиться в тему SMM и начать свою карьеру.'
-    },
-    {
-      image: '2.jpg',
-      name: 'Алёна',
-      text: 'Обратилась в АйтиШторм за помощью копирайтера. Ни разу ещё не пожалела! Ребята действительно вкладывают душу в то, что делают, и каждый текст, который я получаю, с нетерпением хочется выложить в сеть.'
-    },
-    {
-      image: '3.jpg',
-      name: 'Мария',
-      text: 'Команда АйтиШторма за такой короткий промежуток времени сделала невозможное: от простой фирмы по услуге продвижения выросла в мощный блог о важности личного бренда. Класс!'
-    },
-    {
-      image: '1.jpg',
-      name: 'Станислав',
-      text: 'Команда АйтиШторма за такой короткий промежуток времени сделала невозможное: от простой фирмы по услуге продвижения выросла в мощный блог о важности личного бренда. Класс!'
-    },
-    {
-      image: '2.jpg',
-      name: 'Алёна',
-      text: 'Команда АйтиШторма за такой короткий промежуток времени сделала невозможное: от простой фирмы по услуге продвижения выросла в мощный блог о важности личного бренда. Класс!'
-    },
-  ]
+  reviews = reviews;
 
   bannersOwlOptions: OwlOptions = {
     loop: true,
@@ -83,26 +56,43 @@ export class MainComponent implements OnInit {
 
   openDialog(type: 'consult' | 'service', service?: 'Создание сайтов' | 'Продвижение' | 'Реклама' | 'Копирайтинг') {
 
-    const dialogRef = this.dialog.open(CommonDialogComponent, {
-      width: '727px',
-      height: '489px',
-      data: {
-        title: service ? 'Заявка на услугу' : 'Закажите бесплатную консультацию!',
-        service: service,
-        type: type,
-        btnText: 'Оставить заявку',
-      }
-    });
+    const dialogConfig = dialogConfigs[type]
+    dialogConfig.data.service = service ? service : ''
+
+    const dialogRef = this.dialog.open(CommonDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.dialog.open(CommonDialogComponent, {
-          width: '727px',
-          height: '489px',
-          data: {
-            type: 'thanks',
-          }
-        });
+        this.dialog.open(CommonDialogComponent, dialogConfigs.done);
       }
     })
   }
 }
+
+
+const reviews = [
+  {
+    image: '1.jpg',
+    name: 'Станислав',
+    text: 'Спасибо огромное АйтиШторму за прекрасный блог с полезными статьями! Именно они и побудили меня углубиться в тему SMM и начать свою карьеру.'
+  },
+  {
+    image: '2.jpg',
+    name: 'Алёна',
+    text: 'Обратилась в АйтиШторм за помощью копирайтера. Ни разу ещё не пожалела! Ребята действительно вкладывают душу в то, что делают, и каждый текст, который я получаю, с нетерпением хочется выложить в сеть.'
+  },
+  {
+    image: '3.jpg',
+    name: 'Мария',
+    text: 'Команда АйтиШторма за такой короткий промежуток времени сделала невозможное: от простой фирмы по услуге продвижения выросла в мощный блог о важности личного бренда. Класс!'
+  },
+  {
+    image: '1.jpg',
+    name: 'Станислав',
+    text: 'Команда АйтиШторма за такой короткий промежуток времени сделала невозможное: от простой фирмы по услуге продвижения выросла в мощный блог о важности личного бренда. Класс!'
+  },
+  {
+    image: '2.jpg',
+    name: 'Алёна',
+    text: 'Команда АйтиШторма за такой короткий промежуток времени сделала невозможное: от простой фирмы по услуге продвижения выросла в мощный блог о важности личного бренда. Класс!'
+  },
+]

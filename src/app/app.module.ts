@@ -19,7 +19,7 @@ import { ArticleCardComponent } from './shared/components/article-card/article-c
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { CommonDialogComponent } from './views/components/common-dialog/common-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxMaskModule} from "ngx-mask";
 
 @NgModule({
@@ -46,6 +46,7 @@ import {NgxMaskModule} from "ngx-mask";
     MatIconModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
+    FormsModule,
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
