@@ -1,5 +1,9 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {RequestService} from "../../../shared/services/request.service";
+import {RequestType, RequestTypeType} from "../../../../types/request.type";
+import {DefaultResponseType} from "../../../../types/default-response.type";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-common-dialog',
@@ -8,22 +12,57 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 })
 export class CommonDialogComponent implements OnInit {
 
+  requestError: boolean = false;
+
   @Input()
   formValues = {
     service: '',
     name: '',
-    phone: ''
+    phone: '',
+    type: ''
   }
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+              private requestService: RequestService,
+              private dialogRef: MatDialogRef<CommonDialogComponent>,
+              private dialog: MatDialog,) { }
 
   ngOnInit(): void {
+    this.formValues.service = this.data.service
+    this.formValues.type = this.data.type
   }
 
-  proceedBtn(service: string) {
-    // some logic
-    this.formValues.service = service;
-    console.log(this.formValues)
+  sendRequest() {
+    const requestData: RequestType = {
+      name: this.formValues.name,
+      phone: this.formValues.phone,
+      type: this.formValues.type as RequestTypeType,
+
+    }
+
+    // Uncomment below and click "Подробнее" in the Banner on Main page to check error message in Dialog
+    // requestData.service = ''
+    // Uncomment above to check error message in Dialog
+
+    if (this.formValues.type === 'order') {
+      requestData.service = this.formValues.service
+    }
+
+    this.requestService.sendRequest(requestData).subscribe({
+      next: (data: DefaultResponseType) => {
+        if (data.error) {
+          console.log(data.error);
+          this.requestError = true;
+        }
+        console.log(data.message)
+        this.dialogRef.close();
+        this.dialog.open(CommonDialogComponent, dialogConfigs.done)
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        console.error(errorResponse.error.message);
+        this.requestError = true;
+      }
+    })
   }
 }
 
@@ -49,7 +88,7 @@ export const dialogConfigs = {
     data: {
       title: 'Заявка на услугу',
       service: '',
-      type: 'service',
+      type: 'order',
       btnText: 'Оставить заявку',
     }
   },
@@ -59,7 +98,7 @@ export const dialogConfigs = {
     data: {
       title: 'Закажите бесплатную консультацию!',
       service: '',
-      type: 'consult',
+      type: 'consultation',
       btnText: 'Оставить заявку',
     }
   },

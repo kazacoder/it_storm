@@ -74,7 +74,7 @@ html, body {
 }
 
 .input, .auth-input {
-  input {
+  input, select {
     width: 422px;
     box-sizing: border-box;
     padding: 16px 18px;
@@ -93,6 +93,14 @@ html, body {
     &:disabled {
       color: $blue-text-color;
     }
+  }
+  select {
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    color: $blue-text-color;
   }
 }
 

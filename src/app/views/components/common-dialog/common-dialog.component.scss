@@ -18,10 +18,12 @@
 
 
   .common-dialog-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
     .common-dialog-title {
       margin-top: 45px;
@@ -62,6 +64,14 @@
       .button-big {
         width: 422px;
       }
+    }
+
+    .common-dialog-error {
+      margin-top: 20px;
+      max-width: 422px;
+      color: red;
+      font-size: 12px;
+      text-align: center;
     }
   }
 }

@@ -8,11 +8,16 @@
     </button>
   </div>
   <div class="common-dialog-wrapper">
-    <div *ngIf="data.type === 'service' || data.type === 'consult'">
+    <div *ngIf="data.type === 'order' || data.type === 'consultation'">
       <div class="common-dialog-title">{{ data.title }}</div>
       <div class="common-dialog-inputs inputs">
-        <div class="input" *ngIf="data.type === 'service'">
-          <input type="text" disabled placeholder="Услуга" [value]="data.service">
+        <div class="input" *ngIf="data.type === 'order'">
+          <select name="service" [(ngModel)]="formValues.service" [value]="data.service">
+            <option value="Создание сайтов">Создание сайтов</option>
+            <option value="Продвижение">Продвижение</option>
+            <option value="Реклама">Реклама</option>
+            <option value="Копирайтинг">Копирайтинг</option>
+          </select>
         </div>
         <div class="input">
           <input type="text" name="name" #name=ngModel [(ngModel)]="formValues.name" required placeholder="Ваше имя"
@@ -24,10 +29,13 @@
                  [ngStyle]="{'border-color': phone.invalid && (phone.touched || phone.dirty) ? 'red' : ''}">
         </div>
       </div>
-      <div class="common-dialog-buttons" *ngIf="data.type === 'service' || data.type === 'consult'">
+      <div class="common-dialog-buttons" *ngIf="data.type === 'order' || data.type === 'consultation'">
         <button class="button button-big" [disabled]="name.invalid || phone.invalid"
-                [mat-dialog-close]="true" (click)="proceedBtn(data.service)">{{ data.btnText }}
+                (click)="sendRequest()">{{ data.btnText }}
         </button>
+      </div>
+      <div class="common-dialog-error" *ngIf="requestError">
+        Произошла ошибка при отправке формы, попробуйте еще раз.
       </div>
     </div>
     <!--  Done dialog  -->

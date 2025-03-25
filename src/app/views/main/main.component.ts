@@ -55,16 +55,9 @@ export class MainComponent implements OnInit {
 
 
   openDialog(type: 'consult' | 'service', service?: 'Создание сайтов' | 'Продвижение' | 'Реклама' | 'Копирайтинг') {
-
     const dialogConfig = dialogConfigs[type]
     dialogConfig.data.service = service ? service : ''
-
-    const dialogRef = this.dialog.open(CommonDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.dialog.open(CommonDialogComponent, dialogConfigs.done);
-      }
-    })
+    this.dialog.open(CommonDialogComponent, dialogConfig);
   }
 }
 
