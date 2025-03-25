@@ -40,7 +40,7 @@ export class CommonDialogComponent implements OnInit {
 
     }
 
-    // Uncomment below and click "Подробнее" in the Banner on Main page to check error message in Dialog
+    // Uncomment below and click "Перезвоните мне" in the Footer to check error message in Dialog
     // requestData.service = ''
     // Uncomment above to check error message in Dialog
 
@@ -99,7 +99,7 @@ export const dialogConfigs = {
       title: 'Закажите бесплатную консультацию!',
       service: '',
       type: 'consultation',
-      btnText: 'Оставить заявку',
+      btnText: 'Заказать консультацию',
     }
   },
 }
