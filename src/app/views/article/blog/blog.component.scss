@@ -1,0 +1,61 @@
+@import "../../../../assets/styles/fonts";
+@import "../../../../assets/styles/variables";
+
+.blog {
+  margin-top: 80px;
+  margin-bottom: 120px;
+
+  .container {
+
+    .blog-title {
+      font-family: Lora, sans-serif;
+      font-weight: 400;
+      font-size: 38px;
+      color: $blue-text-color;
+
+    }
+
+    .blog-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 40px;
+
+      .blog-applied-filters {
+        display: flex;
+        gap: 10px;
+
+        .blog-applied-filter {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          font-size: 16px;
+          color: $blue-text-color;
+          padding: 8px 20px;
+          border: 2px solid #709FDC;
+          border-radius: 5px;
+
+          a {
+            display: flex;
+          }
+        }
+      }
+    }
+
+    .blog-content {
+      margin-top: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 40px;
+      column-gap: 24px;
+    }
+
+    .blog-pagination {
+      margin-top: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

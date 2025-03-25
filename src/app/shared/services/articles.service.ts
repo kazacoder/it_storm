@@ -15,4 +15,8 @@ export class ArticlesService {
   getTopArticles(): Observable<ArticleType[] | DefaultResponseType> {
     return this.http.get<ArticleType[] | DefaultResponseType>(environment.api + 'articles/top')
   }
+
+  getArticles(): Observable<{ count: number, pages: number, items: ArticleType[] }> {
+    return this.http.get<{ count: number, pages: number, items: ArticleType[] }>(environment.api + 'articles')
+  }
 }
