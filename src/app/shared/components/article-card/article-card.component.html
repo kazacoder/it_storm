@@ -5,7 +5,9 @@
   <div class="articles-item-info">
     <div class="articles-item-content">
       <div class="articles-item-title">{{ article.title }}</div>
-      <div class="articles-item-text">{{ article.description }}</div>
+      <div class="articles-item-text">
+        {{ (article.description.length>260) ? (article.description | slice:0:261) + '...' : article.description }}
+      </div>
     </div>
   </div>
   <div class="articles-item-actions">

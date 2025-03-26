@@ -23,6 +23,7 @@
 
       .blog-applied-filters {
         display: flex;
+        flex-wrap: wrap;
         gap: 10px;
 
         .blog-applied-filter {
@@ -32,19 +33,93 @@
           gap: 8px;
           font-size: 16px;
           color: $blue-text-color;
-          padding: 8px 20px;
+          padding: 7px 20px;
           border: 2px solid #709FDC;
           border-radius: 5px;
 
           a {
             display: flex;
+            cursor: pointer;
+            text-decoration: none;
+          }
+        }
+      }
+
+      .blog-filters {
+        position: relative;
+
+
+        &.open {
+          min-width: 257px;
+          width: 257px;
+          box-sizing: border-box;
+
+          .blog-filters-head {
+            border-color: #B9D5FD;
+            background: #B9D5FD;
+            padding: 12px 23px;
+            justify-content: space-between;
+          }
+
+          .blog-filters-body {
+            display: flex;
+          }
+        }
+
+        .blog-filters-head {
+          border: 2px solid transparent;
+          border-radius: 5px 5px 0 0;
+          display: flex;
+          align-items: center;
+          gap: 70px;
+          cursor: pointer;
+          padding: 12px 0;
+          color: $gray-text-color;
+          box-sizing: border-box;
+
+
+        }
+        &-body {
+          width: 100%;
+          position: absolute;
+          top: 44px;
+          z-index: 4;
+          background-color: #FFFFFF;
+          border: 2px solid #B9D5FD;
+          border-radius: 0 0 5px 5px;
+          padding: 12px 23px;
+          box-sizing: border-box;
+          display: none;
+          flex-direction: column;
+          gap: 14px;
+
+          .blog-filters-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #BEBEBE;
+            text-decoration: none;
+            cursor: pointer;
+
+            &.active {
+              color: $gray-text-color;
+            }
+
+            &-name {
+              font-size: 16px;
+            }
+
+            &-sign {
+              font-size: 24px;
+            }
+
           }
         }
       }
     }
 
     .blog-content {
-      margin-top: 40px;
+      margin-top: 30px;
       display: flex;
       flex-wrap: wrap;
       row-gap: 40px;
@@ -56,6 +131,34 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 40px;
+
+      .blog-pagination-arrow {
+
+        a {
+          display: flex;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+      }
+
+      .blog-pagination-pages {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+
+        .blog-pagination-page {
+          text-decoration: none;
+          cursor: pointer;
+
+          &.active {
+            color: $blue-text-color;
+          }
+        }
+      }
     }
   }
 }

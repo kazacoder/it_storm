@@ -8,6 +8,9 @@ import {ArticleType} from "../../../../types/article.type";
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
+
+  filterOpened: boolean = false;
+
   articles: ArticleType[] = [];
   constructor(private articleService: ArticlesService) { }
 
@@ -16,6 +19,10 @@ export class BlogComponent implements OnInit {
       this.articles = data.items
       console.log(this.articles)
     })
+  }
+
+  toggleFilter() {
+    this.filterOpened = !this.filterOpened;
   }
 
 }
