@@ -87,19 +87,24 @@
           background-color: #FFFFFF;
           border: 2px solid #B9D5FD;
           border-radius: 0 0 5px 5px;
-          padding: 12px 23px;
+          padding: 7px 0;
           box-sizing: border-box;
           display: none;
           flex-direction: column;
-          gap: 14px;
+          gap: 4px;
 
           .blog-filters-item {
+            padding: 5px 23px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             color: #BEBEBE;
             text-decoration: none;
             cursor: pointer;
+
+            &:hover {
+              background-color:  rgba(0, 0, 0, .04);
+            }
 
             &.active {
               color: $gray-text-color;
