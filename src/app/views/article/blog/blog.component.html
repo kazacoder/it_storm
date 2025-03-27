@@ -32,7 +32,7 @@
         <div class="blog-filters-body">
           <a class="blog-filters-item"
              [class.active] = category.filterOn
-             (click)="applyFilter(category.id)"
+             (click)="applyFilter(category.id, !!category.filterOn)"
              *ngFor="let category of categories">
             <div class="blog-filters-item-name">{{ category.name }}</div>
             <div class="blog-filters-item-sign">{{ category.filterOn ? '-' : '+' }}</div>
