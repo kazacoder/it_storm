@@ -3,36 +3,9 @@
     <div class="blog-title">Блог</div>
     <div class="blog-head">
       <div class="blog-applied-filters">
-        <div class="blog-applied-filter">
-          <span>Дизайн</span>
-          <a>
-            <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="0.935531" y1="1.15002" x2="12.9563" y2="13.1708" stroke="#709FDC" stroke-linecap="round"/>
-              <line x1="12.9236" y1="1.12984" x2="0.902784" y2="13.1507" stroke="#709FDC" stroke-linecap="round"/>
-            </svg>
-          </a>
-        </div>
-        <div class="blog-applied-filter">
-          <span>Фриланс</span>
-          <a>
-            <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="0.935531" y1="1.15002" x2="12.9563" y2="13.1708" stroke="#709FDC" stroke-linecap="round"/>
-              <line x1="12.9236" y1="1.12984" x2="0.902784" y2="13.1507" stroke="#709FDC" stroke-linecap="round"/>
-            </svg>
-          </a>
-        </div>
-        <div class="blog-applied-filter">
-          <span>Копирайтинг</span>
-          <a>
-            <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="0.935531" y1="1.15002" x2="12.9563" y2="13.1708" stroke="#709FDC" stroke-linecap="round"/>
-              <line x1="12.9236" y1="1.12984" x2="0.902784" y2="13.1507" stroke="#709FDC" stroke-linecap="round"/>
-            </svg>
-          </a>
-        </div>
-        <div class="blog-applied-filter">
-          <span>SMM</span>
-          <a>
+        <div class="blog-applied-filter" *ngFor="let filter of categoriesFilterList">
+          <span>{{ filter.name }}</span>
+          <a (click)="applyFilter(filter.id)">
             <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
               <line x1="0.935531" y1="1.15002" x2="12.9563" y2="13.1708" stroke="#709FDC" stroke-linecap="round"/>
               <line x1="12.9236" y1="1.12984" x2="0.902784" y2="13.1507" stroke="#709FDC" stroke-linecap="round"/>
@@ -57,25 +30,12 @@
           </div>
         </div>
         <div class="blog-filters-body">
-          <a class="blog-filters-item">
-            <div class="blog-filters-item-name">Фриланс</div>
-            <div class="blog-filters-item-sign">+</div>
-          </a>
-          <a class="blog-filters-item active">
-            <div class="blog-filters-item-name">Дизайн</div>
-            <div class="blog-filters-item-sign">-</div>
-          </a>
-          <a class="blog-filters-item">
-            <div class="blog-filters-item-name">SMM</div>
-            <div class="blog-filters-item-sign">+</div>
-          </a>
-          <a class="blog-filters-item">
-            <div class="blog-filters-item-name">Таргет</div>
-            <div class="blog-filters-item-sign">+</div>
-          </a>
-          <a class="blog-filters-item">
-            <div class="blog-filters-item-name">Копирайтинг</div>
-            <div class="blog-filters-item-sign">+</div>
+          <a class="blog-filters-item"
+             [class.active] = category.filterOn
+             (click)="applyFilter(category.id)"
+             *ngFor="let category of categories">
+            <div class="blog-filters-item-name">{{ category.name }}</div>
+            <div class="blog-filters-item-sign">{{ category.filterOn ? '-' : '+' }}</div>
           </a>
         </div>
       </div>
