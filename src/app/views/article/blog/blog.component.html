@@ -13,8 +13,8 @@
           </a>
         </div>
       </div>
-      <div class="blog-filters" [class.open]="filterOpened" (click)="toggleFilter()">
-        <div class="blog-filters-head">
+      <div class="blog-filters" [class.open]="filterOpened">
+        <div class="blog-filters-head" (click)="toggleFilter()">
           <span>Фильтр</span>
           <div *ngIf="!filterOpened">
             <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,7 +32,7 @@
         <div class="blog-filters-body">
           <a class="blog-filters-item"
              [class.active] = category.filterOn
-             (click)="applyFilter(category.id, !!category.filterOn)"
+             (click)="applyFilter(category.id)"
              *ngFor="let category of categories">
             <div class="blog-filters-item-name">{{ category.name }}</div>
             <div class="blog-filters-item-sign">{{ category.filterOn ? '-' : '+' }}</div>
