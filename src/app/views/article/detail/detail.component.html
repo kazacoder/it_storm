@@ -83,32 +83,17 @@
                 <button class="button button-big">Опубликовать комментарий</button>
               </div>
             </div>
-          </div>.
+          </div>
           <div class="article-comments-items">
             <div class="article-comments-item">
               <div class="article-comments-item-head">
                 <div class="article-comments-item-image">
-                  <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <mask id="mask0_71_2419" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="60"
-                          height="60">
-                      <circle cx="30" cy="30" r="30" fill="#B9D5FD"/>
-                    </mask>
-                    <g mask="url(#mask0_71_2419)">
-                      <circle cx="29.9751" cy="22.7368" r="11.7368" stroke="#709FDC" stroke-width="2"/>
-                      <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M49.942 55.0001C49.3422 44.4932 40.632 36.158 29.9749 36.158C19.3179 36.158 10.6077 44.4932 10.0079 55.0001H8.00488C8.607 43.388 18.2131 34.158 29.9749 34.158C41.7368 34.158 51.3429 43.388 51.945 55.0001H49.942Z"
-                            fill="#709FDC"/>
-                    </g>
-                  </svg>
-
                   <svg width="44" height="45" viewBox="0 0 44 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="21.9751" cy="12.7368" r="11.7368" stroke="#709FDC" stroke-width="2"/>
                     <path fill-rule="evenodd" clip-rule="evenodd"
                           d="M41.942 45.0001C41.3422 34.4932 32.632 26.158 21.9749 26.158C11.3179 26.158 2.60766 34.4932 2.00789 45.0001H0.00488281C0.607003 33.388 10.2131 24.158 21.9749 24.158C33.7368 24.158 43.3429 33.388 43.945 45.0001H41.942Z"
                           fill="#709FDC"/>
                   </svg>
-
-
                 </div>
                 <div class="article-comments-item-info">
                   <div class="article-comments-item-info-name">Амелия</div>
@@ -159,7 +144,7 @@
               </div>
             </div>
           </div>
-          <div class="article-comments-show-more">
+          <a class="article-comments-show-more">
             <span>Загрузить ещё комментарии</span>
             <div>
               <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -168,17 +153,16 @@
                   fill="#709FDC"/>
               </svg>
             </div>
-          </div>
-
+          </a>
         </div>
 
       </div>
       <div class="article-related">
         <div class="article-related-title">Читайте также:</div>
         <div class="article-related-items">
-
+          <article-card *ngFor="let article of relatedArticles" [article]="article" ></article-card>
         </div>
       </div>
-    </div> ws
+    </div>
   </div>
 </div>
