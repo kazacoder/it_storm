@@ -9,6 +9,7 @@
           <li><a routerLink="/" fragment="services">Услуги</a></li>
           <li><a routerLink="/" fragment="about">О нас</a></li>
           <li><a routerLinkActive="active"
+                 [routerLinkActiveOptions]="{exact: false}"
                  [routerLink]="['/articles']">Статьи</a></li>
           <li><a routerLink="/" fragment="reviews">Отзывы</a></li>
           <li><a routerLink="/" fragment="contacts">Контакты</a></li>
