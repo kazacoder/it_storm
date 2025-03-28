@@ -6,7 +6,7 @@
     <div class="articles-item-content">
       <div class="articles-item-title">{{ article.title }}</div>
       <div class="articles-item-text">
-        {{ (article.description.length>260) ? (article.description | slice:0:261) + '...' : article.description }}
+        {{ (article.description.length>230) ? (article.description | slice:0:231) + '...' : article.description }}
       </div>
     </div>
   </div>

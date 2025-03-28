@@ -22,6 +22,7 @@ export class BlogComponent implements OnInit, AfterViewInit {
   articles: ArticleType[] = [];
   activeParams: ActiveParamsType = {categories: []}
   filterDropDown: Element | null = null;
+  pages: number[] = [];
 
   constructor(private articleService: ArticlesService,
               private activatedRoute: ActivatedRoute,
@@ -105,11 +106,39 @@ export class BlogComponent implements OnInit, AfterViewInit {
       this.articleService.getArticles(this.activeParams).subscribe({
         next: data => {
           this.articles = data.items;
+          this.pages = []
+          for (let i = 1; i <= data.pages; i++) {
+            this.pages.push(i)
+          }
+
         },
         error: (err: HttpErrorResponse) => {
           console.log(err.message);
         }
       });
     });
+  }
+
+  openPage(page: number): void {
+    if (this.activeParams.page === undefined && this.activeParams.page === page ||
+      this.activeParams.page === undefined && page === 1) {
+      return;
+    }
+    this.activeParams.page = page;
+    this.router.navigate([], { relativeTo: this.activatedRoute, queryParams: this.activeParams }).then();
+  }
+
+  openPrevPage(): void {
+    if (this.activeParams.page && this.activeParams.page > 1) {
+      this.activeParams.page--;
+      this.router.navigate([], { relativeTo: this.activatedRoute, queryParams: this.activeParams }).then();
+    }
+  }
+
+  openNextPage(): void {
+    if (this.activeParams.page && this.activeParams.page < this.pages.length) {
+      this.activeParams.page++;
+      this.router.navigate([], { relativeTo: this.activatedRoute, queryParams: this.activeParams }).then();
+    }
   }
 }

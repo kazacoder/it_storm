@@ -3,6 +3,8 @@
 
 .articles-item {
   width: 292px;
+  height: 596px;
+
 
   &-image {
     height: 291px;
@@ -24,6 +26,7 @@
   }
   .articles-item-info {
     margin-top: 15px;
+    overflow: hidden;
 
     .articles-item-content {
       height: 230px;
@@ -42,7 +45,7 @@
         line-height: 1.3;
         color: $gray-text-color;
         overflow: hidden;
-        max-height: 146px;
+        //max-height: 146px;
       }
     }
   }
