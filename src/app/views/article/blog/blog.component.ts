@@ -70,6 +70,7 @@ export class BlogComponent implements OnInit, AfterViewInit {
 
   applyFilter(categoryId: string): void {
     const currentCategory = this.categories.find((category) => category.id === categoryId);
+    this.activeParams.page = 1
 
     if (currentCategory) {
       if (currentCategory.filterOn) {
@@ -87,6 +88,19 @@ export class BlogComponent implements OnInit, AfterViewInit {
 
   proceedArticles() {
     this.activatedRoute.queryParams.subscribe(params => {
+
+      if (!this.activatedRoute.snapshot.queryParams['page']) {
+        this.activeParams.page = 1
+      }
+
+      // ToDo подумать еще над логикой, нужно ли оставлять фильтры при переходе по ссылке "Статьи"?
+      // сброс всех фильтров при переходе по ссылке без параметров
+      if (!this.activatedRoute.snapshot.queryParams['categories']) {
+        this.activeParams.categories = []
+        this.categoriesFilterList = []
+        this.categories.map(category => category.filterOn = false)
+      }
+
       if (params.hasOwnProperty("categories")) {
         this.categoriesFilterList = [];
         this.activeParams.categories = Array.isArray(params['categories']) ? params['categories'] : [params['categories']];
