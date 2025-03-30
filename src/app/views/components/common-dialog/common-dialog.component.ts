@@ -4,6 +4,8 @@ import {RequestService} from "../../../shared/services/request.service";
 import {RequestType, RequestTypeType} from "../../../../types/request.type";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {HttpErrorResponse} from "@angular/common/http";
+import {AuthService} from "../../../core/auth.service";
+import {UserService} from "../../../shared/services/user.service";
 
 @Component({
   selector: 'app-common-dialog',
@@ -25,11 +27,16 @@ export class CommonDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private requestService: RequestService,
               private dialogRef: MatDialogRef<CommonDialogComponent>,
-              private dialog: MatDialog,) { }
+              private dialog: MatDialog,
+              private userService: UserService) { }
 
   ngOnInit(): void {
     this.formValues.service = this.data.service
     this.formValues.type = this.data.type
+    const userName = this.userService.getUserName()
+    if (userName) {
+      this.formValues.name = userName
+    }
   }
 
   sendRequest() {
