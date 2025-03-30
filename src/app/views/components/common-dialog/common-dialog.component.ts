@@ -4,7 +4,6 @@ import {RequestService} from "../../../shared/services/request.service";
 import {RequestType, RequestTypeType} from "../../../../types/request.type";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {HttpErrorResponse} from "@angular/common/http";
-import {AuthService} from "../../../core/auth.service";
 import {UserService} from "../../../shared/services/user.service";
 
 @Component({
