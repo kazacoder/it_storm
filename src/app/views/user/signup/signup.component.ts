@@ -6,7 +6,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {AuthService} from "../../../core/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserService} from "../../../shared/services/user.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogComponent} from "../../components/dialog/dialog.component";
 import {ViewportScroller} from "@angular/common";
@@ -17,6 +17,8 @@ import {ViewportScroller} from "@angular/common";
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
+
+  next: [] | null = null
 
   signupForm = this.fb.group({
     name: ['', [Validators.required, Validators.pattern(/^[А-ЯЁ][а-яё]*(?:\s+[А-ЯЁ][а-яё]*)*\s*$/)]],
@@ -31,9 +33,13 @@ export class SignupComponent implements OnInit {
               private userService: UserService,
               private router: Router,
               private dialog: MatDialog,
-              private viewportScroller: ViewportScroller) { }
+              private viewportScroller: ViewportScroller,
+              private activatedRoute: ActivatedRoute,) { }
 
   ngOnInit(): void {
+    if (this.activatedRoute.snapshot.queryParams['next']) {
+      this.next = this.activatedRoute.snapshot.queryParams['next'];
+    }
   }
 
   signup(): void {
@@ -64,7 +70,11 @@ export class SignupComponent implements OnInit {
           this.authService.userId = loginResponse.userId;
           this.userService.setUserName(this.signupForm.value.name!);
           this._matSnackBar.open('Вы успешно зарегистрировались');
-          this.router.navigate(['/']).then();
+          if (this.next) {
+            this.router.navigate(this.next, {fragment: 'comments'}).then();
+          } else {
+            this.router.navigate(['/']).then();
+          }
         },
         error: (errorResponse: HttpErrorResponse) => {
           if (errorResponse.error && errorResponse.error.message) {

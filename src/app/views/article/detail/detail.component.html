@@ -22,7 +22,7 @@
             Понравилась статья? Поделитесь ею в своих социальных сетях!
           </div>
           <div class="article-body-social-share-items">
-            <div class="article-body-social-share-item">
+            <a class="article-body-social-share-item">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_17_2179)">
                   <path
@@ -35,8 +35,8 @@
                   </clipPath>
                 </defs>
               </svg>
-            </div>
-            <div class="article-body-social-share-item">
+            </a>
+            <a class="article-body-social-share-item">
               <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_17_2175)">
                   <path
@@ -49,8 +49,8 @@
                   </clipPath>
                 </defs>
               </svg>
-            </div>
-            <div class="article-body-social-share-item">
+            </a>
+            <a class="article-body-social-share-item">
               <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_17_2177)">
                   <path
@@ -63,29 +63,35 @@
                   </clipPath>
                 </defs>
               </svg>
-            </div>
+            </a>
           </div>
         </div>
-        <div class="article-comments">
+        <div class="article-comments" id="comments">
           <div class="article-comments-title">Комментарии к статье</div>
-          <div class="article-comments-unlogged">
-            Чтобы оставлять комментарии, <a routerLink="/login">войдите</a> или <a routerLink="/signup">зарегистрируйтесь</a>.
+          <div class="article-comments-unlogged" *ngIf="!isLoggedIn">
+            Чтобы оставлять комментарии,
+            <a routerLink="/login" [queryParams]="article?.url ? {next: ['article', article?.url]} : {}">войдите</a>
+            или
+            <a routerLink="/signup" [queryParams]="article?.url ? {next: ['article', article?.url]} : {}">зарегистрируйтесь</a>.
           </div>
-          <div class="article-comments-first-comment">
+          <div class="article-comments-first-comment" *ngIf="!article?.commentsCount">
             Будьте первым, кто оставит свой комментарий к статье!
           </div>
-          <div class="article-comments-self-comment">
+          <div class="article-comments-self-comment" *ngIf="isLoggedIn">
             <div class="article-comments-form">
-              <textarea name="" id="" cols="30" rows="10"
+              <textarea name="comment" id="comment" #comment=ngModel cols="30" rows="10"
+                        [(ngModel)]="commentText" required
                         placeholder="Напишите Ваш комментарий к статье..."
                         class="article-comments-form-input"></textarea>
               <div class="article-comments-form-actions">
-                <button class="button button-big">Опубликовать комментарий</button>
+                <button class="button button-big"
+                        [disabled]="comment.invalid"
+                        (click)="sendComment()">Опубликовать комментарий</button>
               </div>
             </div>
           </div>
           <div class="article-comments-items">
-            <div class="article-comments-item">
+            <div class="article-comments-item" *ngFor="let comment of comments">
               <div class="article-comments-item-head">
                 <div class="article-comments-item-image">
                   <svg width="44" height="45" viewBox="0 0 44 45" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -96,17 +102,14 @@
                   </svg>
                 </div>
                 <div class="article-comments-item-info">
-                  <div class="article-comments-item-info-name">Амелия</div>
-                  <div class="article-comments-item-info-date">20.01.2023 23:00</div>
+                  <div class="article-comments-item-info-name">{{ comment.user.name }}</div>
+                  <div class="article-comments-item-info-date">{{ comment.date | date: 'dd.MM.yyyy HH:mm' }}</div>
                 </div>
               </div>
-              <div class="article-comments-item-text">
-                Статья супер, спасибо! Взяла на заметку очень многое для себя и своей фирмы по разработке
-                пользовательского интерфейса. Хотелось бы послушать мнение других тоже!
-              </div>
+              <div class="article-comments-item-text">{{ comment.text }}</div>
               <div class="article-comments-item-footer">
-                <div class="article-comment-reaction like">
-                  <div class="article-comment-reaction-count">51</div>
+                <a class="article-comment-reaction like">
+                  <div class="article-comment-reaction-count">{{ comment.likesCount }}</div>
                   <div class="article-comment-reaction-image">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -117,9 +120,9 @@
                         stroke="#071739" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
-                </div>
-                <div class="article-comment-reaction dislike">
-                  <div class="article-comment-reaction-count">2</div>
+                </a>
+                <a class="article-comment-reaction dislike active">
+                  <div class="article-comment-reaction-count">{{ comment.dislikesCount }}</div>
                   <div class="article-comment-reaction-image">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -130,8 +133,8 @@
                         stroke="#071739" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
-                </div>
-                <div class="article-comment-info">
+                </a>
+                <a class="article-comment-violate" data-title="Пожаловаться на комментарий">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
                           stroke="#071739" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -140,11 +143,13 @@
                     <path d="M11.9946 16H12.0036" stroke="#071739" stroke-width="1.5" stroke-linecap="round"
                           stroke-linejoin="round"/>
                   </svg>
-                </div>
+                </a>
               </div>
             </div>
           </div>
-          <a class="article-comments-show-more">
+          <a (click)="getComments()"
+             *ngIf="comments.length < commentsCount"
+             class="article-comments-show-more">
             <span>Загрузить ещё комментарии</span>
             <div>
               <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">

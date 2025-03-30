@@ -19,6 +19,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.isLogged = !!localStorage.getItem(this.accessTokenKey);
+    this.isLogged$.next(this.isLogged)
   }
 
   login(email: string, password: string, rememberMe: boolean): Observable<DefaultResponseType | LoginResponseType> {
@@ -67,6 +68,7 @@ export class AuthService {
     localStorage.removeItem(this.refreshTokenKey);
     this.isLogged = false;
     this.isLogged$.next(false);
+    console.log('logout')
   }
 
   getTokens(): { accessToken: string | null, refreshToken: string | null } {

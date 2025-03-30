@@ -71,6 +71,7 @@
 
       .article-body {
         max-width: 818px;
+
         .article-body-social-share {
           margin-top: 60px;
           display: flex;
@@ -90,7 +91,7 @@
 
             .article-body-social-share-item {
               display: flex;
-
+              cursor: pointer;
             }
           }
         }
@@ -119,6 +120,7 @@
           }
 
         }
+
         .article-comments-self-comment {
           margin-top: 40px;
 
@@ -143,6 +145,7 @@
               }
             }
           }
+
           .article-comments-form-actions {
             margin-top: 20px;
 
@@ -151,8 +154,12 @@
             }
           }
         }
+
         .article-comments-items {
           margin-top: 60px;
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
 
           .article-comments-item {
 
@@ -217,15 +224,68 @@
 
                 .article-comment-reaction-image {
                   display: flex;
+                  cursor: pointer;
+
+                }
+
+                &.active {
+                  color: $blue-text-color;
+
+                  svg {
+                    path {
+                      stroke: $blue-text-color;
+                    }
+                  }
                 }
               }
-              .article-comment-info {
+
+              .article-comment-violate {
+                cursor: pointer;
                 display: flex;
+                position: relative;
+                svg {
+                  path {
+                    transition: all 0.3s ease 0.5s;
+                  }
+                }
+
+                &:hover {
+                  svg {
+                    path {
+                      stroke: $blue-text-color;
+                    }
+                  }
+                }
+
+                &[data-title]:after {
+                  content: attr(data-title);
+                  position: absolute;
+                  top: -150%;
+                  left: 27px;
+                  font-size: 14px;
+                  width: 140px;
+                  padding: 4px 4px 4px 8px;
+                  transition: all 0.3s ease 0.5s;
+                  opacity: 0;
+                  z-index: 99999;
+                  visibility: hidden;
+                  border-radius: 5px;
+                  background-color: $blue-text-color;
+                  box-shadow: 0 0 4px #45658f;
+                  color: #FFFFFF;
+                }
+
+                &[data-title]:hover:after {
+                  opacity: 1;
+                  visibility: visible;
+
+                }
               }
             }
           }
         }
       }
+
       .article-comments-show-more {
         margin-top: 60px;
         font-weight: 500;
@@ -244,6 +304,7 @@
         }
 
       }
+
       .article-related {
         position: sticky;
         top: 0;

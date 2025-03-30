@@ -7,7 +7,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserService} from "../../../shared/services/user.service";
 import {UserInfoType} from "../../../../types/user-info.type";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -16,19 +16,25 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
+  next: [] | null = null
+
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    rememberMe: [false]
+    rememberMe: [false],
   })
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private _matSnackBar: MatSnackBar,
               private userService: UserService,
-              private router: Router,) { }
+              private router: Router,
+              private activatedRoute: ActivatedRoute,) { }
 
   ngOnInit(): void {
+    if (this.activatedRoute.snapshot.queryParams['next']) {
+      this.next = this.activatedRoute.snapshot.queryParams['next'];
+    }
   }
 
   login(): void {
@@ -74,7 +80,12 @@ export class LoginComponent implements OnInit {
             }
           });
           this._matSnackBar.open('Вы успешно авторизовались');
-          this.router.navigate(['/']).then();
+          if (this.next) {
+            this.router.navigate(this.next, {fragment: 'comments'}).then();
+          } else {
+            this.router.navigate(['/']).then();
+          }
+
         },
         error: (errorResponse: HttpErrorResponse) => {
           if (errorResponse.error && errorResponse.error.message) {
