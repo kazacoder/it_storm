@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Title} from "@angular/platform-browser";
 import {ArticleDetailType} from "../../../../types/article.type";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -8,6 +8,8 @@ import {AuthService} from "../../../core/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CommentType} from "../../../../types/comment.type";
 import {CommentsService} from "../../../shared/services/comments.service";
+import {ActionsType} from "../../../../types/reactions.type";
+import {DefaultResponseType} from "../../../../types/default-response.type";
 
 @Component({
   selector: 'app-detail',
@@ -23,6 +25,7 @@ export class DetailComponent implements OnInit {
   commentText: string = ''
   commentsCount: number = 0;
   comments: CommentType[] = [];
+  action = ActionsType;
 
   constructor(private titleService: Title,
               private router: Router,
@@ -40,6 +43,9 @@ export class DetailComponent implements OnInit {
 
     this.authService.isLogged$.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
+      if (!loggedIn) {
+        this.comments.map(comment => delete comment.action)
+      }
     })
 
     this.proceedArticle(true)
@@ -51,10 +57,13 @@ export class DetailComponent implements OnInit {
         .subscribe({
           next: (data: ArticleDetailType) => {
             this.article = data;
-            this.comments = data.comments;
+            if (this.isLoggedIn) {
+              this.comments = this.addReactionToComments(this.article.id, data.comments)
+            } else {
+              this.comments = data.comments;
+            }
             this.commentsCount = data.commentsCount;
             this.titleService.setTitle(data.title)
-            console.log(this.article);
           },
           error: (errorResponse: HttpErrorResponse) => {
             console.log(errorResponse);
@@ -98,13 +107,91 @@ export class DetailComponent implements OnInit {
             if (newComment) {
               this.comments = [data.comments[0], ...this.comments]
             } else {
-              this.comments.push(...data.comments);
+              if (this.isLoggedIn) {
+                this.comments.push(...this.addReactionToComments(this.article!.id, data.comments))
+              } else {
+                this.comments.push(...data.comments);
+              }
             }
           },
           error: (errorResponse: HttpErrorResponse) => {
             console.log(errorResponse.message);
           }
         })
+    }
+  }
+
+  addReactionToComments(articleId: string, comments: CommentType[]) {
+    this.commentsService.getCommentsActions(articleId).
+    subscribe(reactions => {
+      if ((reactions as DefaultResponseType).error !== undefined) {
+        console.log((reactions as DefaultResponseType).message)
+      } else {
+        comments = comments.map(comment => {
+          comment.action = (reactions as { comment: string, action: ActionsType}[]).find(reaction => reaction.comment === comment.id)?.action
+          return comment;
+        })
+      }
+    });
+    return comments;
+  }
+
+  proceedReaction(id: string, action: ActionsType):void {
+    if (this.isLoggedIn) {
+      this.commentsService.applyCommentAction(id, {action: action})
+        .subscribe({
+          next: () => {
+            if (action === ActionsType.violate) {
+              this._snackBar.open('Жалоба отправлена.');
+            } else {
+              // update reaction
+              const currentComment = this.comments.find(comment => comment.id === id)
+              let updatedComment: { comment: string, action: ActionsType } | undefined = undefined;
+              this.commentsService.getCommentActions(currentComment!.id).subscribe({
+                next: data => {
+                  updatedComment = (data as { comment: string, action: ActionsType }[])[0]
+                  if (updatedComment) {
+                    currentComment!.action = action;
+                  } else {
+                    delete currentComment?.action
+                  }
+                },
+                error: (errorResponse: HttpErrorResponse) => {
+                  console.log(errorResponse.error.message)
+                }
+              })
+              //update count
+              if (action === currentComment!.action && action === this.action.dislike) {
+                currentComment!.dislikesCount -= 1
+              }
+              if (action !== currentComment!.action && action === this.action.dislike) {
+                currentComment!.dislikesCount += 1
+                if (currentComment!.action === this.action.like) {
+                  currentComment!.likesCount -= 1
+                }
+              }
+              if (action === currentComment!.action && action === this.action.like) {
+                currentComment!.likesCount -= 1
+              }
+              if (action !== currentComment!.action && action === this.action.like) {
+                currentComment!.likesCount += 1
+                if (currentComment!.action === this.action.dislike) {
+                  currentComment!.dislikesCount -= 1
+                }
+              }
+
+              this._snackBar.open('Ваш голос учтен.');
+            }
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            console.log(errorResponse.error)
+            if (action === ActionsType.violate && errorResponse.error.message === 'Это действие уже применено к комментарию') {
+              this._snackBar.open('Жалоба уже отправлена.');
+            } else {
+              this._snackBar.open('Что-то пошло не так, посторите попытку позже.');
+            }
+          }
+        });
     }
   }
 }

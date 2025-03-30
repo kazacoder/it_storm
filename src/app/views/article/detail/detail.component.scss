@@ -211,6 +211,46 @@
               gap: 15px;
               align-items: center;
 
+              &.logged-in {
+                .article-comment-reaction-image {
+                  cursor: pointer;
+                }
+                .article-comment-violate {
+                  cursor: pointer;
+                  &:hover {
+                    svg {
+                      path {
+                        stroke: $blue-text-color;
+                      }
+                    }
+                  }
+
+                  &[data-title]:after {
+                    content: attr(data-title);
+                    position: absolute;
+                    top: -150%;
+                    left: 27px;
+                    font-size: 14px;
+                    width: 140px;
+                    padding: 4px 4px 4px 8px;
+                    transition: all 0.3s ease 0.5s;
+                    opacity: 0;
+                    z-index: 99999;
+                    visibility: hidden;
+                    border-radius: 5px;
+                    background-color: $blue-text-color;
+                    box-shadow: 0 0 4px #45658f;
+                    color: #FFFFFF;
+                  }
+
+                  &[data-title]:hover:after {
+                    opacity: 1;
+                    visibility: visible;
+
+                  }
+                }
+              }
+
               .article-comment-reaction {
                 display: flex;
                 align-items: center;
@@ -224,8 +264,6 @@
 
                 .article-comment-reaction-image {
                   display: flex;
-                  cursor: pointer;
-
                 }
 
                 &.active {
@@ -240,7 +278,6 @@
               }
 
               .article-comment-violate {
-                cursor: pointer;
                 display: flex;
                 position: relative;
                 svg {
@@ -249,37 +286,7 @@
                   }
                 }
 
-                &:hover {
-                  svg {
-                    path {
-                      stroke: $blue-text-color;
-                    }
-                  }
-                }
 
-                &[data-title]:after {
-                  content: attr(data-title);
-                  position: absolute;
-                  top: -150%;
-                  left: 27px;
-                  font-size: 14px;
-                  width: 140px;
-                  padding: 4px 4px 4px 8px;
-                  transition: all 0.3s ease 0.5s;
-                  opacity: 0;
-                  z-index: 99999;
-                  visibility: hidden;
-                  border-radius: 5px;
-                  background-color: $blue-text-color;
-                  box-shadow: 0 0 4px #45658f;
-                  color: #FFFFFF;
-                }
-
-                &[data-title]:hover:after {
-                  opacity: 1;
-                  visibility: visible;
-
-                }
               }
             }
           }

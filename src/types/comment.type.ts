@@ -1,3 +1,5 @@
+import {ActionsType} from "./reactions.type";
+
 export type CommentType = {
   id: string,
   text: string,
@@ -8,4 +10,5 @@ export type CommentType = {
     id: string,
     name: string
   }
+  action?: ActionsType,
 }
