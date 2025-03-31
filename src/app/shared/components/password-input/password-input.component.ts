@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, HostListener, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild} from '@angular/core';
 import {MatIconRegistry} from "@angular/material/icon";
 import {DomSanitizer} from "@angular/platform-browser";
 
@@ -34,7 +34,11 @@ export class PasswordInputComponent {
   @Output()
   password_value = new EventEmitter<string>();
 
+  @Input()
+  singUp = false;
+
   password: string | undefined = undefined;
+  passPattern = /^(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
 
   constructor(private elementRef: ElementRef,
               private iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {

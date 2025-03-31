@@ -33,22 +33,7 @@
           </div>
         </div>
         <div class="auth-input">
-          <input type="password"
-                 [ngStyle]="{'border-color': signupForm.get('password')?.invalid
-                 && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched) ? 'red': ''}"
-                 placeholder="Пароль" formControlName="password">
-          <div class="auth-input-error"
-               *ngIf="signupForm.get('password')?.invalid
-               && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)">
-            <span *ngIf="signupForm.get('password')?.errors?.['pattern']">
-              Минимальная длина 8 символов.
-              <br>
-              Допустимы латинские буквы, цифры.
-              <br>
-              Как минимум 1 цифра и 1 буква в ВЕРХНЕМ регистре.
-            </span>
-            <span *ngIf="signupForm.get('password')?.errors?.['required']">Заполните поле</span>
-          </div>
+          <password-input (password_value)="setPass($event)" [singUp]="true"></password-input>
         </div>
         <div class="auth-checkbox">
           <input type="checkbox"

@@ -100,4 +100,8 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  setPass(value: string): void {
+    this.signupForm.get('password')?.setValue(value);
+  }
+
 }
