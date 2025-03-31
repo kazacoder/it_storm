@@ -68,7 +68,6 @@ export class AuthService {
     localStorage.removeItem(this.refreshTokenKey);
     this.isLogged = false;
     this.isLogged$.next(false);
-    console.log('logout')
   }
 
   getTokens(): { accessToken: string | null, refreshToken: string | null } {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../../core/auth.service";
 import {DefaultResponseType} from "../../../../types/default-response.type";
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    if (this.loginForm.valid && this.loginForm.value.email && this.loginForm.value.password ) {
+    if (this.loginForm.valid && this.loginForm.value.email && this.loginForm.value.password) {
       this.authService.login(
         this.loginForm.value.email,
         this.loginForm.value.password,
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       ).subscribe({
         next: (data: DefaultResponseType | LoginResponseType) => {
           let error = null;
-          if((data as DefaultResponseType).error !== undefined) {
+          if ((data as DefaultResponseType).error !== undefined) {
             error = (data as DefaultResponseType).message;
           }
 
@@ -98,4 +98,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  setPass(value: string): void {
+    this.loginForm.get('password')?.setValue(value);
+  }
 }

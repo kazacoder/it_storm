@@ -17,13 +17,7 @@
           </div>
         </div>
         <div class="auth-input">
-          <input type="password"
-                 [ngStyle]="{'border-color': loginForm.get('password')?.invalid
-                 && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched) ? 'red': ''}"
-                 placeholder="Пароль" formControlName="password">
-          <div class="auth-input-error"
-               *ngIf="loginForm.get('password')?.invalid
-               && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">Введите пароль</div>
+          <password-input (password_value)="setPass($event)"></password-input>
         </div>
         <div class="auth-checkbox">
           <input type="checkbox" id="remember" formControlName="rememberMe">
