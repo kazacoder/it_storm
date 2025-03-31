@@ -89,13 +89,18 @@ export class DetailComponent implements OnInit {
   sendComment(): void {
     if (this.commentText && this.article) {
       this.commentsService.sendComment({text: this.commentText, article: this.article.id})
-        .subscribe(data => {
-          this._snackBar.open(data.message);
-          if (!data.error) {
-            this.commentText = '';
-            this.getComments(0, true);
+        .subscribe({
+          next: data => {
+            this._snackBar.open(data.message);
+            if (!data.error) {
+              this.commentText = '';
+              this.getComments(0, true);
+            }
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            console.log(errorResponse.error.message);
           }
-        })
+        });
     }
 
   }

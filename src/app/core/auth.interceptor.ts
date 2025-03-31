@@ -1,15 +1,17 @@
 import {Injectable} from "@angular/core";
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {AuthService} from "./auth.service";
-import {catchError, finalize, Observable, throwError} from "rxjs";
+import {catchError, finalize, Observable, switchMap, throwError} from "rxjs";
 import {DefaultResponseType} from "../../types/default-response.type";
 import {LoginResponseType} from "../../types/login-response.type";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private router: Router) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -21,8 +23,9 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(authReq)
         .pipe(
           catchError((err: HttpErrorResponse) => {
-            if (err.status === 401 && !authReq.url.includes('/login') && !authReq.url.includes('/refresh')) {
-              return this.handle401Error(authReq, next);
+            if (err.status === 500 && err.error.message === 'jwt expired' && !authReq.url.includes('/login')
+              && !authReq.url.includes('/refresh')) {
+              return this.handleJwtExpiredError(authReq, next);
             }
             return throwError(() => err);
           }),
@@ -37,10 +40,38 @@ export class AuthInterceptor implements HttpInterceptor {
     }))
   }
 
-  handle401Error(req: HttpRequest<any>, next: HttpHandler) {
-    return next.handle(req)
-    // toDo
-    // return this.authService.refresh()
+  handleJwtExpiredError(req: HttpRequest<any>, next: HttpHandler) {
+    return this.authService.refresh()
+      .pipe(
+        switchMap((result: DefaultResponseType | LoginResponseType) => {
+          let error = '';
+          if ((result as DefaultResponseType).message !== undefined) {
+            error = (result as DefaultResponseType).message;
+          }
+
+          const refreshResult = result as LoginResponseType;
+          if (!refreshResult.refreshToken || !refreshResult.accessToken || !refreshResult.userId) {
+            error = 'Ошибка авторизации';
+          }
+
+          if (error) {
+            return throwError(() => error);
+          }
+
+          this.authService.setTokens(refreshResult.accessToken, refreshResult.userId);
+
+          const authReq = req.clone({
+            headers: req.headers.set('x-auth', refreshResult.accessToken),
+          })
+
+          return next.handle(authReq);
+        }),
+        catchError(error => {
+          this.authService.removeTokens();
+          this.router.navigate(['/']).then();
+          return throwError(() => error);
+        })
+      )
   }
 
 }
