@@ -106,7 +106,7 @@ export class DetailComponent implements OnInit {
       this.commentsService.getComments({offset: offset, article: this.article.id})
         // Тестирование Loader --start--
         .pipe(
-          delay(1500)
+          delay(newComment ? 0 : 1500)
         )
         // Тестирование Loader --end--
         .subscribe({
