@@ -291,6 +291,14 @@
             }
           }
         }
+
+        .loader-wrapper {
+          margin-top: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          padding-left: 120px;
+        }
       }
 
       .article-comments-show-more {

@@ -10,6 +10,7 @@ import {CommentType} from "../../../../types/comment.type";
 import {CommentsService} from "../../../shared/services/comments.service";
 import {ActionsType} from "../../../../types/reactions.type";
 import {DefaultResponseType} from "../../../../types/default-response.type";
+import {delay} from "rxjs";
 
 @Component({
   selector: 'app-detail',
@@ -26,6 +27,7 @@ export class DetailComponent implements OnInit {
   commentsCount: number = 0;
   comments: CommentType[] = [];
   action = ActionsType;
+  loading: boolean = false;
 
   constructor(private titleService: Title,
               private router: Router,
@@ -100,7 +102,13 @@ export class DetailComponent implements OnInit {
 
   getComments(offset: number = this.comments.length, newComment= false) {
     if (this.article) {
+      this.loading = true
       this.commentsService.getComments({offset: offset, article: this.article.id})
+        // Тестирование Loader --start--
+        .pipe(
+          delay(1500)
+        )
+        // Тестирование Loader --end--
         .subscribe({
           next: data => {
             this.commentsCount = data.allCount;
@@ -113,11 +121,13 @@ export class DetailComponent implements OnInit {
                 this.comments.push(...data.comments);
               }
             }
+            this.loading = false
           },
           error: (errorResponse: HttpErrorResponse) => {
+            this.loading = false;
             console.log(errorResponse.message);
           }
-        })
+        });
     }
   }
 
@@ -160,7 +170,7 @@ export class DetailComponent implements OnInit {
                   console.log(errorResponse.error.message)
                 }
               })
-              //update count
+              //update count Todo попробовать упростить код
               if (action === currentComment!.action && action === this.action.dislike) {
                 currentComment!.dislikesCount -= 1
               }
@@ -188,7 +198,7 @@ export class DetailComponent implements OnInit {
             if (action === ActionsType.violate && errorResponse.error.message === 'Это действие уже применено к комментарию') {
               this._snackBar.open('Жалоба уже отправлена.');
             } else {
-              this._snackBar.open('Что-то пошло не так, посторите попытку позже.');
+              this._snackBar.open('Что-то пошло не так, повторите попытку позже.');
             }
           }
         });

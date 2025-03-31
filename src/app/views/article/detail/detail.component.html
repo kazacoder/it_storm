@@ -86,7 +86,8 @@
               <div class="article-comments-form-actions">
                 <button class="button button-big"
                         [disabled]="comment.invalid"
-                        (click)="sendComment()">Опубликовать комментарий</button>
+                        (click)="sendComment()">Опубликовать комментарий
+                </button>
               </div>
             </div>
           </div>
@@ -107,7 +108,7 @@
                 </div>
               </div>
               <div class="article-comments-item-text">{{ comment.text }}</div>
-              <div class="article-comments-item-footer"  [class.logged-in]="isLoggedIn">
+              <div class="article-comments-item-footer" [class.logged-in]="isLoggedIn">
                 <a class="article-comment-reaction like"
                    [class.active]="comment.action === action.like"
                    (click)="proceedReaction(comment.id, action.like)">
@@ -154,7 +155,7 @@
             </div>
           </div>
           <a (click)="getComments()"
-             *ngIf="comments.length < commentsCount"
+             *ngIf="comments.length < commentsCount && !loading"
              class="article-comments-show-more">
             <span>Загрузить ещё комментарии</span>
             <div>
@@ -165,13 +166,25 @@
               </svg>
             </div>
           </a>
+          <div class="loader-wrapper" *ngIf="loading">
+            <div class="lds-spinner">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
         </div>
 
       </div>
       <div class="article-related">
         <div class="article-related-title">Читайте также:</div>
         <div class="article-related-items">
-          <article-card *ngFor="let article of relatedArticles" [article]="article" ></article-card>
+          <article-card *ngFor="let article of relatedArticles" [article]="article"></article-card>
         </div>
       </div>
     </div>
