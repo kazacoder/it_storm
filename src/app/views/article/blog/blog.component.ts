@@ -30,8 +30,7 @@ export class BlogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // ToDo
-    // doesn't work???
+    // ToDo Why it doesn't work???
     this.filterDropDown = document.querySelector('blog-filters')
   }
 
@@ -93,7 +92,6 @@ export class BlogComponent implements OnInit, AfterViewInit {
         this.activeParams.page = 1
       }
 
-      // ToDo подумать еще над логикой, нужно ли оставлять фильтры при переходе по ссылке "Статьи"?
       // сброс всех фильтров при переходе по ссылке без параметров
       if (!this.activatedRoute.snapshot.queryParams['categories']) {
         this.activeParams.categories = []

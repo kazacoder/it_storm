@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
           this.userService.getUserInfo().subscribe({
             next: data => {
               if ((data as DefaultResponseType).error !== undefined) {
-                //ToDo LogOut
+                this.authService.logout();
                 this.userService.removeUserName();
                 throw new Error((data as DefaultResponseType).message);
               }
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
             },
             error: (errorResponse: HttpErrorResponse) => {
               if (errorResponse.error && errorResponse.message) {
-                //ToDo logout
+                this.authService.logout();
                 this.userService.removeUserName();
               }
             }
