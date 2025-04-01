@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
 
@@ -7,16 +7,13 @@ import {Location} from "@angular/common";
   templateUrl: './page-not-found.component.html',
   styleUrls: ['./page-not-found.component.scss']
 })
-export class PageNotFoundComponent implements OnInit {
+export class PageNotFoundComponent {
 
   canGoBack: boolean;
 
   constructor(private router: Router,
               private location: Location,) {
     this.canGoBack = !!(this.router.getCurrentNavigation()?.previousNavigation);
-  }
-
-  ngOnInit(): void {
   }
 
   goBack(): void {

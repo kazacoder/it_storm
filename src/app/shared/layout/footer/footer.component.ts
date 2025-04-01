@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {CommonDialogComponent, dialogConfigs} from "../../../views/components/common-dialog/common-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 
@@ -7,14 +7,11 @@ import {MatDialog} from "@angular/material/dialog";
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
   currentYear = new Date().getFullYear();
 
   constructor(private dialog: MatDialog,) { }
-
-  ngOnInit(): void {
-  }
 
   callMeBack() {
     const dialogConfig = dialogConfigs['consult']
