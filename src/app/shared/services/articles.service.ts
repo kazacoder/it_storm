@@ -15,24 +15,24 @@ export class ArticlesService {
   constructor(private http: HttpClient) { }
 
   getTopArticles(): Observable<ArticleType[] | DefaultResponseType> {
-    return this.http.get<ArticleType[] | DefaultResponseType>(environment.api + 'articles/top')
+    return this.http.get<ArticleType[] | DefaultResponseType>(environment.api + 'articles/top');
   }
 
   getArticles(params: ActiveParamsType): Observable<{ count: number, pages: number, items: ArticleType[] }> {
     return this.http.get<{ count: number, pages: number, items: ArticleType[] }>(environment.api + 'articles', {
       params: params
-    })
+    });
   }
 
   getArticle(url: string): Observable<ArticleDetailType> {
-    return this.http.get<ArticleDetailType>(environment.api + 'articles/' + url)
+    return this.http.get<ArticleDetailType>(environment.api + 'articles/' + url);
   }
 
   getRelatedArticles(url: string): Observable<ArticleDetailType[]> {
-    return this.http.get<ArticleDetailType[]>(environment.api + 'articles/related/' + url)
+    return this.http.get<ArticleDetailType[]>(environment.api + 'articles/related/' + url);
   }
 
   getCategories(): Observable<CategoryType[]> {
-    return this.http.get<CategoryType[]>(environment.api + 'categories')
+    return this.http.get<CategoryType[]>(environment.api + 'categories');
   }
 }

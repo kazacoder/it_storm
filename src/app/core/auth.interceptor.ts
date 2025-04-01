@@ -24,7 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (tokens && !tokens.accessToken && tokens.refreshToken) {
       this.authService.logout();
       this.userService.removeUserName();
-      this._snackBar.open('Что-то пошло не так. Авторизуйтесь заново.')
+      this._snackBar.open('Что-то пошло не так. Авторизуйтесь заново.');
       throw new Error('Access token not found');
     }
 
@@ -44,12 +44,12 @@ export class AuthInterceptor implements HttpInterceptor {
           finalize(() => {
             // hide loader
           })
-        )
+        );
     }
 
     return next.handle(req).pipe(finalize(() => {
       // hide loader
-    }))
+    }));
   }
 
   handleJwtExpiredError(req: HttpRequest<any>, next: HttpHandler) {
@@ -74,17 +74,17 @@ export class AuthInterceptor implements HttpInterceptor {
 
           const authReq = req.clone({
             headers: req.headers.set('x-auth', refreshResult.accessToken),
-          })
+          });
 
           return next.handle(authReq);
         }),
         catchError(error => {
           this.authService.logout();
           this.userService.removeUserName();
-          this._snackBar.open('Что-то пошло не так. Авторизуйтесь заново.')
+          this._snackBar.open('Что-то пошло не так. Авторизуйтесь заново.');
           // this.router.navigate(['/']).then();
           return throwError(() => error);
         })
-      )
+      );
   }
 }

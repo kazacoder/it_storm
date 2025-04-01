@@ -16,13 +16,13 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  next: [] | null = null
+  next: [] | null = null;
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
     rememberMe: [false],
-  })
+  });
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
@@ -50,14 +50,14 @@ export class LoginComponent implements OnInit {
             error = (data as DefaultResponseType).message;
           }
 
-          const loginResponse = (data as LoginResponseType)
+          const loginResponse = (data as LoginResponseType);
           if (!loginResponse.accessToken || !loginResponse.refreshToken || !loginResponse.userId) {
-            error = 'Ошибка авторизации'
+            error = 'Ошибка авторизации';
           }
 
           if (error) {
             this._matSnackBar.open(error);
-            throw new Error(error)
+            throw new Error(error);
           }
 
           this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit {
             this._matSnackBar.open('Ошибка Авторизации');
           }
         }
-      })
+      });
     }
   }
 

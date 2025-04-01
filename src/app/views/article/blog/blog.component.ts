@@ -20,7 +20,7 @@ export class BlogComponent implements OnInit, AfterViewInit {
   categories: CategoryType[] = [];
   categoriesFilterList: CategoryType[] = [];
   articles: ArticleType[] = [];
-  activeParams: ActiveParamsType = {categories: []}
+  activeParams: ActiveParamsType = {categories: []};
   filterDropDown: Element | null = null;
   pages: number[] = [];
 
@@ -31,7 +31,7 @@ export class BlogComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // ToDo Why it doesn't work???
-    this.filterDropDown = document.querySelector('blog-filters')
+    this.filterDropDown = document.querySelector('blog-filters');
   }
 
   ngOnInit(): void {
@@ -54,7 +54,7 @@ export class BlogComponent implements OnInit, AfterViewInit {
   @HostListener('document:click', ['$event'])
   onClick(event: Event): void {
     if (!this.filterDropDown) {
-      this.filterDropDown = document.querySelector('.blog-filters')
+      this.filterDropDown = document.querySelector('.blog-filters');
     }
 
     if (!document.querySelector('.blog-filters')?.contains(event.target as Node)) {
@@ -69,7 +69,7 @@ export class BlogComponent implements OnInit, AfterViewInit {
 
   applyFilter(categoryId: string): void {
     const currentCategory = this.categories.find((category) => category.id === categoryId);
-    this.activeParams.page = 1
+    this.activeParams.page = 1;
 
     if (currentCategory) {
       if (currentCategory.filterOn) {
@@ -89,14 +89,14 @@ export class BlogComponent implements OnInit, AfterViewInit {
     this.activatedRoute.queryParams.subscribe(params => {
 
       if (!this.activatedRoute.snapshot.queryParams['page']) {
-        this.activeParams.page = 1
+        this.activeParams.page = 1;
       }
 
       // сброс всех фильтров при переходе по ссылке без параметров
       if (!this.activatedRoute.snapshot.queryParams['categories']) {
-        this.activeParams.categories = []
-        this.categoriesFilterList = []
-        this.categories.map(category => category.filterOn = false)
+        this.activeParams.categories = [];
+        this.categoriesFilterList = [];
+        this.categories.map(category => category.filterOn = false);
       }
 
       if (params.hasOwnProperty("categories")) {
@@ -118,9 +118,9 @@ export class BlogComponent implements OnInit, AfterViewInit {
       this.articleService.getArticles(this.activeParams).subscribe({
         next: data => {
           this.articles = data.items;
-          this.pages = []
+          this.pages = [];
           for (let i = 1; i <= data.pages; i++) {
-            this.pages.push(i)
+            this.pages.push(i);
           }
 
         },

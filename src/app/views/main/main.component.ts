@@ -15,7 +15,7 @@ export class MainComponent implements OnInit {
 
   articles: ArticleType[] = [];
   reviews = reviews;
-  @ViewChild('bannerCar') bannerCar: CarouselComponent | undefined
+  @ViewChild('bannerCar') bannerCar: CarouselComponent | undefined;
 
   bannersOwlOptions: OwlOptions = {
     loop: true,
@@ -31,7 +31,7 @@ export class MainComponent implements OnInit {
     autoplaySpeed: 2000,
     autoplayTimeout: 5000,
     autoplayHoverPause: true,
-  }
+  };
 
   reviewsOwlOptions: OwlOptions = {
     loop: true,
@@ -43,7 +43,7 @@ export class MainComponent implements OnInit {
     margin: 25,
     items: 3,
     nav: false,
-  }
+  };
 
   constructor(private articlesService: ArticlesService,
               private dialog: MatDialog,) { }
@@ -52,20 +52,20 @@ export class MainComponent implements OnInit {
     this.articlesService.getTopArticles()
       .subscribe(data => {
         if ((data as DefaultResponseType).error !== undefined) {
-          throw new Error((data as DefaultResponseType).message)
+          throw new Error((data as DefaultResponseType).message);
         }
         this.articles = data as ArticleType[];
-      })
+      });
   }
 
 
   openDialog(type: 'consult' | 'service', service?: 'Создание сайтов' | 'Продвижение' | 'Реклама' | 'Копирайтинг') {
-    const dialogConfig = dialogConfigs[type]
-    dialogConfig.data.service = service ? service : ''
+    const dialogConfig = dialogConfigs[type];
+    dialogConfig.data.service = service ? service : '';
     this.dialog.open(CommonDialogComponent, dialogConfig).afterClosed().subscribe(() => {
-      this.bannerCar?.startAutoplay()
+      this.bannerCar?.startAutoplay();
     });
-    this.bannerCar?.stopAutoplay()
+    this.bannerCar?.stopAutoplay();
   }
 }
 
@@ -96,4 +96,4 @@ const reviews = [
     name: 'Алёна',
     text: 'Команда АйтиШторма за такой короткий промежуток времени сделала невозможное: от простой фирмы по услуге продвижения выросла в мощный блог о важности личного бренда. Класс!'
   },
-]
+];

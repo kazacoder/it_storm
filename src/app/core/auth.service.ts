@@ -23,24 +23,24 @@ export class AuthService {
               private userService: UserService,
               private _snackBar: MatSnackBar,) {
     this.isLogged = !!localStorage.getItem(this.accessTokenKey);
-    this.isLogged$.next(this.isLogged)
+    this.isLogged$.next(this.isLogged);
   }
 
   login(email: string, password: string, rememberMe: boolean): Observable<DefaultResponseType | LoginResponseType> {
     return this.http.post<DefaultResponseType | LoginResponseType>(environment.api + 'login',
-      {email, password, rememberMe})
+      {email, password, rememberMe});
   }
 
   signup(name: string, email: string, password: string): Observable<DefaultResponseType | LoginResponseType> {
     return this.http.post<DefaultResponseType | LoginResponseType>(environment.api + 'signup',
-      {name, email, password})
+      {name, email, password});
   }
 
   logout() {
     const tokens = this.getTokens();
     if (tokens && tokens.refreshToken) {
       this.http.post<DefaultResponseType>(environment.api + 'logout',
-        {refreshToken: tokens.refreshToken},)
+        {refreshToken: tokens.refreshToken},);
     }
     this.removeTokens();
     this.userId = null;
@@ -51,11 +51,11 @@ export class AuthService {
     if (tokens && tokens.refreshToken) {
       return this.http.post<DefaultResponseType | LoginResponseType>(environment.api + 'refresh', {
         refreshToken: tokens.refreshToken,
-      })
+      });
     }
     this.logout();
     this.userService.removeUserName();
-    this._snackBar.open('Что-то пошло не так. Авторизуйтесь заново.')
+    this._snackBar.open('Что-то пошло не так. Авторизуйтесь заново.');
     throw throwError(() => "Can't find the tokens" );
   }
 

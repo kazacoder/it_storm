@@ -23,7 +23,7 @@ export class DetailComponent implements OnInit {
   relatedArticles: ArticleDetailType[] = [];
   title: string = "Название статьи";
   isLoggedIn: boolean = false;
-  commentText: string = ''
+  commentText: string = '';
   commentsCount: number = 0;
   comments: CommentType[] = [];
   action = ActionsType;
@@ -46,11 +46,11 @@ export class DetailComponent implements OnInit {
     this.authService.isLogged$.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
       if (!loggedIn) {
-        this.comments.map(comment => delete comment.action)
+        this.comments.map(comment => delete comment.action);
       }
-    })
+    });
 
-    this.proceedArticle(true)
+    this.proceedArticle(true);
   }
 
   proceedArticle(getRelated?:boolean): void {
@@ -60,12 +60,12 @@ export class DetailComponent implements OnInit {
           next: (data: ArticleDetailType) => {
             this.article = data;
             if (this.isLoggedIn) {
-              this.comments = this.addReactionToComments(this.article.id, data.comments)
+              this.comments = this.addReactionToComments(this.article.id, data.comments);
             } else {
               this.comments = data.comments;
             }
             this.commentsCount = data.commentsCount;
-            this.titleService.setTitle(data.title)
+            this.titleService.setTitle(data.title);
           },
           error: (errorResponse: HttpErrorResponse) => {
             console.log(errorResponse);
@@ -107,7 +107,7 @@ export class DetailComponent implements OnInit {
 
   getComments(offset: number = this.comments.length, newComment= false) {
     if (this.article) {
-      this.loading = true
+      this.loading = true;
       this.commentsService.getComments({offset: offset, article: this.article.id})
         // Тестирование Loader --start--
         .pipe(
@@ -118,15 +118,15 @@ export class DetailComponent implements OnInit {
           next: data => {
             this.commentsCount = data.allCount;
             if (newComment) {
-              this.comments = [data.comments[0], ...this.comments]
+              this.comments = [data.comments[0], ...this.comments];
             } else {
               if (this.isLoggedIn) {
-                this.comments.push(...this.addReactionToComments(this.article!.id, data.comments))
+                this.comments.push(...this.addReactionToComments(this.article!.id, data.comments));
               } else {
                 this.comments.push(...data.comments);
               }
             }
-            this.loading = false
+            this.loading = false;
           },
           error: (errorResponse: HttpErrorResponse) => {
             this.loading = false;
@@ -140,12 +140,12 @@ export class DetailComponent implements OnInit {
     this.commentsService.getCommentsActions(articleId).
     subscribe(reactions => {
       if ((reactions as DefaultResponseType).error !== undefined) {
-        console.log((reactions as DefaultResponseType).message)
+        console.log((reactions as DefaultResponseType).message);
       } else {
         comments = comments.map(comment => {
-          comment.action = (reactions as { comment: string, action: ActionsType}[]).find(reaction => reaction.comment === comment.id)?.action
+          comment.action = (reactions as { comment: string, action: ActionsType}[]).find(reaction => reaction.comment === comment.id)?.action;
           return comment;
-        })
+        });
       }
     });
     return comments;
@@ -160,38 +160,38 @@ export class DetailComponent implements OnInit {
               this._snackBar.open('Жалоба отправлена.');
             } else {
               // update reaction
-              const currentComment = this.comments.find(comment => comment.id === id)
+              const currentComment = this.comments.find(comment => comment.id === id);
               let updatedComment: { comment: string, action: ActionsType } | undefined = undefined;
               this.commentsService.getCommentActions(currentComment!.id).subscribe({
                 next: data => {
-                  updatedComment = (data as { comment: string, action: ActionsType }[])[0]
+                  updatedComment = (data as { comment: string, action: ActionsType }[])[0];
                   if (updatedComment) {
                     currentComment!.action = action;
                   } else {
-                    delete currentComment?.action
+                    delete currentComment?.action;
                   }
                 },
                 error: (errorResponse: HttpErrorResponse) => {
-                  console.log(errorResponse.error.message)
+                  console.log(errorResponse.error.message);
                 }
-              })
+              });
               //update count Todo попробовать упростить код
               if (action === currentComment!.action && action === this.action.dislike) {
-                currentComment!.dislikesCount -= 1
+                currentComment!.dislikesCount -= 1;
               }
               if (action !== currentComment!.action && action === this.action.dislike) {
-                currentComment!.dislikesCount += 1
+                currentComment!.dislikesCount += 1;
                 if (currentComment!.action === this.action.like) {
-                  currentComment!.likesCount -= 1
+                  currentComment!.likesCount -= 1;
                 }
               }
               if (action === currentComment!.action && action === this.action.like) {
-                currentComment!.likesCount -= 1
+                currentComment!.likesCount -= 1;
               }
               if (action !== currentComment!.action && action === this.action.like) {
-                currentComment!.likesCount += 1
+                currentComment!.likesCount += 1;
                 if (currentComment!.action === this.action.dislike) {
-                  currentComment!.dislikesCount -= 1
+                  currentComment!.dislikesCount -= 1;
                 }
               }
 
@@ -199,7 +199,7 @@ export class DetailComponent implements OnInit {
             }
           },
           error: (errorResponse: HttpErrorResponse) => {
-            console.log(errorResponse.error)
+            console.log(errorResponse.error);
             if (action === ActionsType.violate && errorResponse.error.message === 'Это действие уже применено к комментарию') {
               this._snackBar.open('Жалоба уже отправлена.');
             } else if (errorResponse.error.message !== 'Токен не валиден') {

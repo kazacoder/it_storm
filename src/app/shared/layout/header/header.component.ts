@@ -20,19 +20,19 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.userName$.subscribe(userName => {
-      this.userName = userName
+      this.userName = userName;
     });
 
     const userNameFromLocalStorage = this.userService.getUserName();
     if (userNameFromLocalStorage) {
-      this.userService.setUserName(userNameFromLocalStorage)
+      this.userService.setUserName(userNameFromLocalStorage);
     }
   }
 
   logout(): void {
     this.authService.logout();
     this.userService.removeUserName();
-    this._snackBar.open('Вы вышли из системы')
+    this._snackBar.open('Вы вышли из системы');
   }
 
 }

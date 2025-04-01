@@ -8,7 +8,7 @@ import {ArticleType} from "../../../../types/article.type";
 })
 export class ArticleCardComponent {
 
-  @Input() article!: ArticleType
+  @Input() article!: ArticleType;
 
   constructor() { }
 

@@ -21,7 +21,7 @@ export class CommonDialogComponent implements OnInit {
     name: '',
     phone: '',
     type: ''
-  }
+  };
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private requestService: RequestService,
@@ -30,11 +30,11 @@ export class CommonDialogComponent implements OnInit {
               private userService: UserService) { }
 
   ngOnInit(): void {
-    this.formValues.service = this.data.service
-    this.formValues.type = this.data.type
-    const userName = this.userService.getUserName()
+    this.formValues.service = this.data.service;
+    this.formValues.type = this.data.type;
+    const userName = this.userService.getUserName();
     if (userName) {
-      this.formValues.name = userName
+      this.formValues.name = userName;
     }
   }
 
@@ -44,14 +44,14 @@ export class CommonDialogComponent implements OnInit {
       phone: this.formValues.phone,
       type: this.formValues.type as RequestTypeType,
 
-    }
+    };
 
     // Uncomment below and click "Перезвоните мне" in the Footer to check error message in Dialog
     // requestData.service = ''
     // Uncomment above to check error message in Dialog
 
     if (this.formValues.type === 'order') {
-      requestData.service = this.formValues.service
+      requestData.service = this.formValues.service;
     }
 
     this.requestService.sendRequest(requestData).subscribe({
@@ -60,15 +60,15 @@ export class CommonDialogComponent implements OnInit {
           console.log(data.error);
           this.requestError = true;
         }
-        console.log(data.message)
+        console.log(data.message);
         this.dialogRef.close();
-        this.dialog.open(CommonDialogComponent, dialogConfigs.done)
+        this.dialog.open(CommonDialogComponent, dialogConfigs.done);
       },
       error: (errorResponse: HttpErrorResponse) => {
         console.error(errorResponse.error.message);
         this.requestError = true;
       }
-    })
+    });
   }
 }
 
@@ -77,7 +77,7 @@ const commonDialogSize = {
   // ToDo: need to realize adaptive size
   width: '727px',
   height: '489px',
-}
+};
 
 export const dialogConfigs = {
   done: {
@@ -108,4 +108,4 @@ export const dialogConfigs = {
       btnText: 'Заказать консультацию',
     }
   },
-}
+};

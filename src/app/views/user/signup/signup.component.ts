@@ -18,7 +18,7 @@ import {ViewportScroller} from "@angular/common";
 })
 export class SignupComponent implements OnInit {
 
-  next: [] | null = null
+  next: [] | null = null;
 
   signupForm = this.fb.group({
     name: ['', [Validators.required, Validators.pattern(/^[А-ЯЁ][а-яё]*(?:\s+[А-ЯЁ][а-яё]*)*\s*$/)]],
@@ -56,14 +56,14 @@ export class SignupComponent implements OnInit {
             error = (data as DefaultResponseType).message;
           }
 
-          const loginResponse = (data as LoginResponseType)
+          const loginResponse = (data as LoginResponseType);
           if (!loginResponse.accessToken || !loginResponse.refreshToken || !loginResponse.userId) {
-            error = 'Ошибка регистрации'
+            error = 'Ошибка регистрации';
           }
 
           if (error) {
             this._matSnackBar.open(error);
-            throw new Error(error)
+            throw new Error(error);
           }
 
           this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
@@ -83,7 +83,7 @@ export class SignupComponent implements OnInit {
             this._matSnackBar.open('Ошибка регистрации');
           }
         }
-      })
+      });
     }
   }
 
@@ -93,7 +93,7 @@ export class SignupComponent implements OnInit {
       if (result !== undefined) {
         this.signupForm.patchValue({agree: result});
       }
-    })
+    });
     if (anchor) {
       // this.viewportScroller.scrollToAnchor(anchor); ?? doesn't work
       document.getElementById(anchor)!.scrollIntoView({behavior: 'smooth'});

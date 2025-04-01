@@ -13,7 +13,7 @@ export class RequestService {
   constructor(private http: HttpClient) { }
 
   sendRequest(request: RequestType): Observable<DefaultResponseType> {
-    return this.http.post<DefaultResponseType>(environment.api + 'requests', request)
+    return this.http.post<DefaultResponseType>(environment.api + 'requests', request);
   }
 
 }

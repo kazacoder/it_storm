@@ -14,7 +14,7 @@ export class FooterComponent {
   constructor(private dialog: MatDialog,) { }
 
   callMeBack() {
-    const dialogConfig = dialogConfigs['consult']
-    this.dialog.open(CommonDialogComponent, dialogConfig)
+    const dialogConfig = dialogConfigs['consult'];
+    this.dialog.open(CommonDialogComponent, dialogConfig);
   }
 }

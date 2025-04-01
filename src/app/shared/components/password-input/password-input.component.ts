@@ -15,9 +15,9 @@ export class PasswordInputComponent implements OnInit {
   singUp: boolean = false;
 
   showPassword = false;
-  passInputType: 'password' | 'text' = 'password'
+  passInputType: 'password' | 'text' = 'password';
   password: string | undefined;
-  passPattern: string | RegExp = ''
+  passPattern: string | RegExp = '';
 
   constructor(private elementRef: ElementRef,
               private iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
@@ -26,7 +26,7 @@ export class PasswordInputComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.passPattern = this.singUp ?  new RegExp(/^(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/) : ''
+    this.passPattern = this.singUp ?  new RegExp(/^(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/) : '';
   }
 
 
@@ -44,7 +44,7 @@ export class PasswordInputComponent implements OnInit {
 
   toggleShow(hide?: boolean) {
     if (hide) {
-      this.showPassword = false
+      this.showPassword = false;
     } else {
       this.showPassword = !this.showPassword;
     }
@@ -66,7 +66,7 @@ const EYE_ICON = `
             d="M1.09212 14.2724C1.07621 14.2527 1.10803 14.2931 1.09212 14.2724C0.96764 14.1021 0.970773 13.8996 1.09268 13.7273C1.10161 13.7147 1.11071 13.7016 1.11993 13.6882C4.781 8.34319 9.32105 5.5 14.0142 5.5C18.7025 5.5 23.2385 8.33554 26.8956 13.6698C26.965 13.771 27 13.875 27 13.9995C27 14.1301 26.9593 14.2399 26.8863 14.3461C23.2302 19.6702 18.6982 22.5 14.0142 22.5C9.30912 22.5 4.75717 19.6433 1.09212 14.2724ZM3.93909 13.3525C3.6381 13.7267 3.6381 14.2722 3.93908 14.6465C7.07417 18.5443 10.6042 20.3749 14.0142 20.3749C17.4243 20.3749 20.9543 18.5443 24.0894 14.6465C24.3904 14.2722 24.3904 13.7267 24.0894 13.3525C20.9543 9.45475 17.4243 7.62513 14.0142 7.62513C10.6042 7.62513 7.07417 9.45475 3.93909 13.3525Z"
             fill="#709FDC" fill-rule="evenodd"/>
   </svg>
-`
+`;
 const EYE_OFF_ICON = `
   <svg width="800px" height="800px" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path clip-rule="evenodd"
@@ -75,4 +75,4 @@ const EYE_OFF_ICON = `
       <path d="M14.6873 22.1761C19.1311 21.9148 23.4056 19.0687 26.8864 13.931C26.9593 13.8234 27 13.7121 27 13.5797C27 13.4535 26.965 13.3481 26.8956 13.2455C25.5579 11.2677 24.1025 9.62885 22.5652 8.34557L21.506 10.2052C22.3887 10.9653 23.2531 11.87 24.0894 12.9239C24.3904 13.3032 24.3904 13.8561 24.0894 14.2354C21.5676 17.4135 18.7903 19.2357 16.0254 19.827L14.6873 22.1761Z"
             fill="#709FDC"/>
   </svg>
-`
+`;
