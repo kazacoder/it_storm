@@ -5,17 +5,29 @@ import {catchError, finalize, Observable, switchMap, throwError} from "rxjs";
 import {DefaultResponseType} from "../../types/default-response.type";
 import {LoginResponseType} from "../../types/login-response.type";
 import {Router} from "@angular/router";
+import {UserService} from "../shared/services/user.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
 
   constructor(private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private userService: UserService,
+              private _snackBar: MatSnackBar,) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const tokens = this.authService.getTokens();
+    let tokens = this.authService.getTokens();
+
+    if (tokens && !tokens.accessToken && tokens.refreshToken) {
+      this.authService.logout();
+      this.userService.removeUserName();
+      this._snackBar.open('Что-то пошло не так. Авторизуйтесь заново.')
+      throw new Error('Access token not found');
+    }
+
     if (tokens && tokens.accessToken) {
       const authReq = req.clone({
         headers: req.headers.set('x-auth', tokens.accessToken)
@@ -58,7 +70,7 @@ export class AuthInterceptor implements HttpInterceptor {
             return throwError(() => error);
           }
 
-          this.authService.setTokens(refreshResult.accessToken, refreshResult.userId);
+          this.authService.setTokens(refreshResult.accessToken, refreshResult.refreshToken);
 
           const authReq = req.clone({
             headers: req.headers.set('x-auth', refreshResult.accessToken),
@@ -67,11 +79,12 @@ export class AuthInterceptor implements HttpInterceptor {
           return next.handle(authReq);
         }),
         catchError(error => {
-          this.authService.removeTokens();
-          this.router.navigate(['/']).then();
+          this.authService.logout();
+          this.userService.removeUserName();
+          this._snackBar.open('Что-то пошло не так. Авторизуйтесь заново.')
+          // this.router.navigate(['/']).then();
           return throwError(() => error);
         })
       )
   }
-
 }

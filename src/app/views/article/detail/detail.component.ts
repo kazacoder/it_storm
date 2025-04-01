@@ -202,7 +202,7 @@ export class DetailComponent implements OnInit {
             console.log(errorResponse.error)
             if (action === ActionsType.violate && errorResponse.error.message === 'Это действие уже применено к комментарию') {
               this._snackBar.open('Жалоба уже отправлена.');
-            } else {
+            } else if (errorResponse.error.message !== 'Токен не валиден') {
               this._snackBar.open('Что-то пошло не так, повторите попытку позже.');
             }
           }

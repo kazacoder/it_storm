@@ -53,6 +53,10 @@ export class PasswordInputComponent implements OnInit {
 }
 
 
+// SVG source:
+// https://www.svgrepo.com/svg/390427/eye-password-see-view
+// https://www.svgrepo.com/svg/390437/eye-key-look-password-security-see
+
 const EYE_ICON = `
   <svg width="800px" height="800px" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path clip-rule="evenodd"

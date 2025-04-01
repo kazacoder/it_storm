@@ -4,6 +4,8 @@ import {HttpClient} from "@angular/common/http";
 import {DefaultResponseType} from "../../types/default-response.type";
 import {LoginResponseType} from "../../types/login-response.type";
 import {environment} from "../../environments/environment";
+import {UserService} from "../shared/services/user.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,9 @@ export class AuthService {
   private isLogged: boolean = false;
   public isLogged$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private userService: UserService,
+              private _snackBar: MatSnackBar,) {
     this.isLogged = !!localStorage.getItem(this.accessTokenKey);
     this.isLogged$.next(this.isLogged)
   }
@@ -49,6 +53,9 @@ export class AuthService {
         refreshToken: tokens.refreshToken,
       })
     }
+    this.logout();
+    this.userService.removeUserName();
+    this._snackBar.open('Что-то пошло не так. Авторизуйтесь заново.')
     throw throwError(() => "Can't find the tokens" );
   }
 
