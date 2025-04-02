@@ -1,0 +1,65 @@
+@import "../../../../../assets/styles/variables";
+
+.burger-button {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: calc(50% - 20px);
+  display: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  svg {
+    width: 100%;
+    height: 100%;
+
+    path {
+      stroke: $blue-text-color;
+    }
+  }
+}
+
+.burger-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #709FDCBA;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+
+  nav ul {
+    min-width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 50px;
+    padding: 60px 0 0 0;
+    margin: 0;
+
+    li {
+      list-style: none;
+
+      a {
+        font-weight: 600;
+        font-size: 28px;
+        text-decoration: none;
+        color: $gray-text-color;
+        border-bottom: 2px solid $gray-text-color;
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: 949px) {
+
+    .burger-button {
+      display: block;
+    }
+}

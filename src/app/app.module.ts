@@ -21,6 +21,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxMaskModule} from "ngx-mask";
 import {ArticleModule} from "./views/article/article.module";
+import { BurgerMenuComponent } from './shared/layout/header/burger-menu/burger-menu.component';
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import {ArticleModule} from "./views/article/article.module";
     DialogComponent,
     PageNotFoundComponent,
     CommonDialogComponent,
+    BurgerMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import {ArticleModule} from "./views/article/article.module";
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     FormsModule,
-    ArticleModule
+    ArticleModule,
+    MatButtonModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},

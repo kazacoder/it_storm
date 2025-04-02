@@ -219,3 +219,23 @@ html, body {
     opacity: 0;
   }
 }
+
+
+@media screen and (max-width: 1149px) {
+  .auth-form {
+    .auth-input {
+      input {
+        background-color: rgba(255, 255, 255, 0.4);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 529px) {
+
+  .input, .auth-input {
+    input, select {
+      width: 100%;
+    }
+  }
+}

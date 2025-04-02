@@ -20,7 +20,7 @@
   }
 }
 
-//1010 - 1114
+//1010 - 1149
 @media screen and (max-width: 1149px) {
 
   .header {
@@ -64,6 +64,10 @@
 
   .header {
 
+    .burger {
+      display: block;
+    }
+
     .container {
       display: grid;
       grid-template-columns: 1fr 2fr;
@@ -84,12 +88,14 @@
 }
 
 
-//480 - 479
+//0 - 479
 @media screen and (max-width: 479px) {
 
   .header {
 
     .container {
+      padding-right: 10px;
+      padding-left: 10px;
 
       .header-right {
         .header-menu {
@@ -105,11 +111,10 @@
             display: flex;
             align-items: center;
             a {
-              display: inline-block;
+              flex-wrap: wrap;
             }
           }
         }
-
       }
     }
   }

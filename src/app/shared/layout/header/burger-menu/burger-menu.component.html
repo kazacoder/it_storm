@@ -1,0 +1,22 @@
+<button class="burger-button" (click)="toggleMEnu()">
+  <div >
+    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 12H20" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+      <path d="M5 17H20" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+      <path d="M5 7H20" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+</button>
+<div class="burger-menu" (click)="toggleMEnu()" *ngIf="isOpen">
+  <nav>
+    <ul>
+      <li><a routerLink="/" fragment="services">Услуги</a></li>
+      <li><a routerLink="/" fragment="about">О нас</a></li>
+      <li><a routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: false}"
+             [routerLink]="['/articles']">Статьи</a></li>
+      <li><a routerLink="/" fragment="reviews">Отзывы</a></li>
+      <li><a routerLink="/" fragment="contacts">Контакты</a></li>
+    </ul>
+  </nav>
+</div>

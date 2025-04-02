@@ -69,3 +69,54 @@
     }
   }
 }
+
+@media screen and (max-width: 529px) {
+
+  .auth-form {
+
+    .auth-form-title {
+      font-family: Lora, sans-serif;
+      font-weight: 400;
+      font-size: 36px;
+      color: $blue-text-color;
+      margin-bottom: 40px;
+    }
+
+    .auth-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 40px;
+
+      .auth-input {
+
+        input {
+          width: 100%;
+        }
+
+        .auth-input-error {
+          max-width: 100%;
+        }
+      }
+
+      .auth-checkbox {
+        gap: 10px;
+        width: 100%;
+
+      }
+      .auth-checkbox-error {
+        max-width: 100%;
+      }
+    }
+
+    .auth-buttons {
+
+      .button {
+        width: 100%;
+      }
+    }
+
+
+  }
+
+}
