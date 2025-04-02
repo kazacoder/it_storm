@@ -5,6 +5,14 @@ import {CategoryType} from "../../../../types/category.type";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ActiveParamsType} from "../../../../types/active-params.type";
+import {MatIconRegistry} from "@angular/material/icon";
+import {DomSanitizer} from "@angular/platform-browser";
+import {
+  ARROW_LEFT_BLUE,
+  ARROW_LEFT_GRAY,
+  ARROW_RIGHT_BLUE,
+  ARROW_RIGHT_GRAY
+} from "../../../../assets/images/svg/svg-collection";
 
 @Component({
   selector: 'app-blog',
@@ -26,7 +34,11 @@ export class BlogComponent implements OnInit, AfterViewInit {
 
   constructor(private articleService: ArticlesService,
               private activatedRoute: ActivatedRoute,
-              private router: Router,) {
+              private router: Router,private iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIconLiteral('arrow-right-blue', sanitizer.bypassSecurityTrustHtml(ARROW_RIGHT_BLUE));
+    iconRegistry.addSvgIconLiteral('arrow-right-gray', sanitizer.bypassSecurityTrustHtml(ARROW_RIGHT_GRAY));
+    iconRegistry.addSvgIconLiteral('arrow-left-blue', sanitizer.bypassSecurityTrustHtml(ARROW_LEFT_BLUE));
+    iconRegistry.addSvgIconLiteral('arrow-left-gray', sanitizer.bypassSecurityTrustHtml(ARROW_LEFT_GRAY));
   }
 
   ngAfterViewInit() {
@@ -57,7 +69,8 @@ export class BlogComponent implements OnInit, AfterViewInit {
       this.filterDropDown = document.querySelector('.blog-filters');
     }
 
-    if (!document.querySelector('.blog-filters')?.contains(event.target as Node)) {
+    if (!document.querySelector('.blog-filters')?.contains(event.target as Element)
+      && document.getElementById('open-filter')) {
       this.filterOpened = false;
     }
   }

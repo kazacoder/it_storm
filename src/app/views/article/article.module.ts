@@ -6,6 +6,7 @@ import {BlogComponent} from './blog/blog.component';
 import {ArticleCardComponent} from "../../shared/components/article-card/article-card.component";
 import { DetailComponent } from './detail/detail.component';
 import {FormsModule} from "@angular/forms";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -14,13 +15,13 @@ import {FormsModule} from "@angular/forms";
     ArticleCardComponent,
     DetailComponent
   ],
-    imports: [
-        CommonModule,
-        ArticleRoutingModule,
-        FormsModule,
-        // AppModule,
+  imports: [
+    CommonModule,
+    ArticleRoutingModule,
+    FormsModule,
+    MatIconModule,
 
-    ],
+  ],
   exports: [
     ArticleCardComponent,
   ]

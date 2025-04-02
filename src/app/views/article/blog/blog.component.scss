@@ -145,6 +145,11 @@
           text-decoration: none;
           cursor: pointer;
 
+          .arrow {
+            height: 19px;
+            width: 10px;
+          }
+
           &.disabled {
             cursor: default;
           }
