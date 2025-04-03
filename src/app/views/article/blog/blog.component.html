@@ -62,7 +62,7 @@
       </div>
       <div class="blog-pagination-pages">
         <a (click)="openPage(activeParams.page === pages.length ? activeParams.page - 3 : activeParams.page - 2)"
-           [title]="activeParams.page === pages.length ? activeParams.page - 3 : activeParams.page - 2"
+           [attr.aria-description]="activeParams.page === pages.length ? activeParams.page - 3 : activeParams.page - 2"
            *ngIf="pages.length > 5 && activeParams.page && activeParams.page > 2" style="cursor: pointer">
           ...
         </a>
@@ -78,7 +78,7 @@
           </a>
         </ng-container>
         <a (click)="openPage(activeParams.page === 1 ? activeParams.page + 3 : activeParams.page + 2)"
-           [title]="activeParams.page === 1 ? activeParams.page + 3 : activeParams.page + 2"
+           [attr.aria-description]="activeParams.page === 1 ? activeParams.page + 3 : activeParams.page + 2"
            *ngIf="pages.length > 5 && activeParams.page && activeParams.page < pages.length - 1" style="cursor: pointer">
           ...
         </a>
