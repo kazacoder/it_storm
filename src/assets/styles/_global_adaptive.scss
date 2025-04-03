@@ -40,6 +40,22 @@
       width: 100%;
     }
   }
+
+  .article-body-text {
+
+    h3, h4 {
+      font-size: 16px;
+    }
+    p, ul, ol {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-weight: 400;
+
+      b {
+        font-weight: 500;
+      }
+    }
+  }
 }
 
 

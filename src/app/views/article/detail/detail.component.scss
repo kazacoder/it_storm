@@ -68,7 +68,8 @@
 
       .article-body {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        column-gap: 40px;
+        grid-template-columns: 1fr 292px;
         grid-template-areas:
           "text related"
           "social-share related"
@@ -76,6 +77,7 @@
 
         .article-body-text {
           grid-area: text;
+          max-width: 818px;
         }
 
         .article-body-social-share {
@@ -138,7 +140,8 @@
               border: 2px solid #709FDC;
               border-radius: 3px;
               outline: none;
-              width: 818px;
+              width: 862px;
+              box-sizing: border-box;
               padding: 20px;
               font-family: Montserrat, sans-serif;
               font-weight: 400;
@@ -356,3 +359,5 @@
     }
   }
 }
+
+@import "adaptive-detail";
