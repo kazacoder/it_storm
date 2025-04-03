@@ -1,0 +1,61 @@
+//1150 - 1279
+@media screen and (max-width: 1279px) {
+  html, body {
+
+  }
+
+  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+//768 - 1149
+@media screen and (max-width: 1149px) {
+  .auth-form {
+    .auth-input {
+      input {
+        background-color: rgba(255, 255, 255, 0.4);
+      }
+    }
+  }
+}
+
+//530 - 767
+@media screen and (max-width: 767px) {
+  .mat-dialog-container {
+    padding: 10px !important;
+
+    .mat-dialog-content {
+      margin: 0 -10px;
+      padding: 0 10px;
+    }
+  }
+}
+
+//000 - 529
+@media screen and (max-width: 529px) {
+  .input, .auth-input {
+    input, select {
+      width: 100%;
+    }
+  }
+
+  .article-body-text {
+
+    h3, h4 {
+      font-size: 16px;
+    }
+    p, ul, ol {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-weight: 400;
+
+      b {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+
