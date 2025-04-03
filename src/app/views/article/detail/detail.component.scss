@@ -65,14 +65,21 @@
 
     .article-container {
       margin-top: 60px;
-      display: flex;
-      align-items: flex-start;
-      gap: 130px;
 
       .article-body {
-        max-width: 818px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "text related"
+          "social-share related"
+          "comments related";
+
+        .article-body-text {
+          grid-area: text;
+        }
 
         .article-body-social-share {
+          grid-area: social-share;
           margin-top: 60px;
           display: flex;
           align-items: center;
@@ -98,6 +105,7 @@
       }
 
       .article-comments {
+        grid-area: comments;
         margin-top: 120px;
 
         .article-comments-title {
@@ -321,6 +329,9 @@
       }
 
       .article-related {
+        grid-area: related;
+        align-self: start;
+        justify-self: end;
         position: sticky;
         top: 0;
         min-width: 292px;
