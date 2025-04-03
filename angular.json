@@ -37,6 +37,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/it_storm/",
               "budgets": [
                 {
                   "type": "initial",
