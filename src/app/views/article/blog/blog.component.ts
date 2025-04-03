@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ArticlesService} from "../../../shared/services/articles.service";
 import {ArticleType} from "../../../../types/article.type";
 import {CategoryType} from "../../../../types/category.type";
@@ -7,12 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ActiveParamsType} from "../../../../types/active-params.type";
 import {MatIconRegistry} from "@angular/material/icon";
 import {DomSanitizer} from "@angular/platform-browser";
-import {
-  ARROW_LEFT_BLUE,
-  ARROW_LEFT_GRAY,
-  ARROW_RIGHT_BLUE,
-  ARROW_RIGHT_GRAY
-} from "../../../../assets/images/svg/svg-collection";
+import {ARROWS, CLOSE} from "../../../../assets/images/svg/svg-collection";
 
 @Component({
   selector: 'app-blog',
@@ -22,28 +17,25 @@ import {
 
 
 
-export class BlogComponent implements OnInit, AfterViewInit {
+export class BlogComponent implements OnInit {
 
   filterOpened: boolean = false;
   categories: CategoryType[] = [];
   categoriesFilterList: CategoryType[] = [];
   articles: ArticleType[] = [];
   activeParams: ActiveParamsType = {categories: []};
-  filterDropDown: Element | null = null;
   pages: number[] = [];
 
   constructor(private articleService: ArticlesService,
               private activatedRoute: ActivatedRoute,
               private router: Router,private iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    iconRegistry.addSvgIconLiteral('arrow-right-blue', sanitizer.bypassSecurityTrustHtml(ARROW_RIGHT_BLUE));
-    iconRegistry.addSvgIconLiteral('arrow-right-gray', sanitizer.bypassSecurityTrustHtml(ARROW_RIGHT_GRAY));
-    iconRegistry.addSvgIconLiteral('arrow-left-blue', sanitizer.bypassSecurityTrustHtml(ARROW_LEFT_BLUE));
-    iconRegistry.addSvgIconLiteral('arrow-left-gray', sanitizer.bypassSecurityTrustHtml(ARROW_LEFT_GRAY));
-  }
-
-  ngAfterViewInit() {
-    // ToDo Why it doesn't work???
-    this.filterDropDown = document.querySelector('blog-filters');
+    iconRegistry.addSvgIconLiteral('arrow-right-blue', sanitizer.bypassSecurityTrustHtml(ARROWS.RIGHT_BLUE));
+    iconRegistry.addSvgIconLiteral('arrow-right-gray', sanitizer.bypassSecurityTrustHtml(ARROWS.RIGHT_GRAY));
+    iconRegistry.addSvgIconLiteral('arrow-left-blue', sanitizer.bypassSecurityTrustHtml(ARROWS.LEFT_BLUE));
+    iconRegistry.addSvgIconLiteral('arrow-left-gray', sanitizer.bypassSecurityTrustHtml(ARROWS.LEFT_GRAY));
+    iconRegistry.addSvgIconLiteral('arrow-down', sanitizer.bypassSecurityTrustHtml(ARROWS.DOWN));
+    iconRegistry.addSvgIconLiteral('arrow-up', sanitizer.bypassSecurityTrustHtml(ARROWS.UP));
+    iconRegistry.addSvgIconLiteral('close', sanitizer.bypassSecurityTrustHtml(CLOSE));
   }
 
   ngOnInit(): void {
@@ -63,14 +55,10 @@ export class BlogComponent implements OnInit, AfterViewInit {
 
   }
 
+  // Closing dropdown filter if click outside
   @HostListener('document:click', ['$event'])
   onClick(event: Event): void {
-    if (!this.filterDropDown) {
-      this.filterDropDown = document.querySelector('.blog-filters');
-    }
-
-    if (!document.querySelector('.blog-filters')?.contains(event.target as Element)
-      && document.getElementById('open-filter')) {
+    if (!document.querySelector('.blog-filters')?.contains(event.target as Element) )  {
       this.filterOpened = false;
     }
   }

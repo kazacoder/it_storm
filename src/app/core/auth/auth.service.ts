@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Observable, Subject, throwError} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {DefaultResponseType} from "../../types/default-response.type";
-import {LoginResponseType} from "../../types/login-response.type";
-import {environment} from "../../environments/environment";
-import {UserService} from "../shared/services/user.service";
+import {DefaultResponseType} from "../../../types/default-response.type";
+import {LoginResponseType} from "../../../types/login-response.type";
+import {environment} from "../../../environments/environment";
+import {UserService} from "../../shared/services/user.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({

@@ -1,4 +1,4 @@
-//xxx - 1379
+//1150 - 1279
 @media screen and (max-width: 1279px) {
   html, body {
 
@@ -10,5 +10,36 @@
   }
 }
 
+//768 - 1149
+@media screen and (max-width: 1149px) {
+  .auth-form {
+    .auth-input {
+      input {
+        background-color: rgba(255, 255, 255, 0.4);
+      }
+    }
+  }
+}
+
+//530 - 767
+@media screen and (max-width: 767px) {
+  .mat-dialog-container {
+    padding: 10px !important;
+
+    .mat-dialog-content {
+      margin: 0 -10px;
+      padding: 0 10px;
+    }
+  }
+}
+
+//000 - 529
+@media screen and (max-width: 529px) {
+  .input, .auth-input {
+    input, select {
+      width: 100%;
+    }
+  }
+}
 
 

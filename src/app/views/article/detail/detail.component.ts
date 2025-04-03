@@ -4,7 +4,7 @@ import {ArticleDetailType} from "../../../../types/article.type";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ArticlesService} from "../../../shared/services/articles.service";
 import {HttpErrorResponse} from "@angular/common/http";
-import {AuthService} from "../../../core/auth.service";
+import {AuthService} from "../../../core/auth/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CommentType} from "../../../../types/comment.type";
 import {CommentsService} from "../../../shared/services/comments.service";

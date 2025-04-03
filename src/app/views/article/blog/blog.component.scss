@@ -41,6 +41,11 @@
             display: flex;
             cursor: pointer;
             text-decoration: none;
+
+            .icon-close {
+              width: 14px;
+              height: 15px;
+            }
           }
         }
       }
@@ -77,6 +82,10 @@
           color: $gray-text-color;
           box-sizing: border-box;
 
+          .icon-arrow {
+            width: 16px;
+            height: 8px;
+          }
 
         }
         &-body {

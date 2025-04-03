@@ -2,10 +2,10 @@ import {Injectable} from "@angular/core";
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {AuthService} from "./auth.service";
 import {catchError, finalize, Observable, switchMap, throwError} from "rxjs";
-import {DefaultResponseType} from "../../types/default-response.type";
-import {LoginResponseType} from "../../types/login-response.type";
+import {DefaultResponseType} from "../../../types/default-response.type";
+import {LoginResponseType} from "../../../types/login-response.type";
 import {Router} from "@angular/router";
-import {UserService} from "../shared/services/user.service";
+import {UserService} from "../../shared/services/user.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable()
