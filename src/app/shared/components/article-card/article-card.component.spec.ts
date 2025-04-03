@@ -14,6 +14,15 @@ describe('ArticleCardComponent', () => {
 
     fixture = TestBed.createComponent(ArticleCardComponent);
     component = fixture.componentInstance;
+    component.article = {
+      id: 'string',
+      title: 'string',
+      description: 'string',
+      image: 'string',
+      date: 'string',
+      category: 'string',
+      url: 'string'
+    }
     fixture.detectChanges();
   });
 
