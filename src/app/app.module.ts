@@ -54,7 +54,7 @@ import {MatButtonModule} from "@angular/material/button";
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    // {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
   exports: [],
   bootstrap: [AppComponent]
