@@ -9,7 +9,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "build-gp": "ng build --output-path docs --base-href /it_storm/ --configuration gp"
   },
   "private": true,
   "dependencies": {
