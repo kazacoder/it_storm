@@ -205,14 +205,6 @@
 <section class="reviews" id="reviews">
   <div class="container">
     <div class="reviews-title">Отзывы о нашей работе</div>
-    <div class="reviews-arrows">
-      <a (click)="reviewsCar.prev()" class="move-backward">
-        <img src="assets/images/arrow_review.png" alt="prev arrow">
-      </a>
-      <a (click)="reviewsCar.next()" class="move-forward">
-        <img src="assets/images/arrow_review.png" alt="next arrow">
-      </a>
-    </div>
     <div class="review-items">
       <owl-carousel-o [options]="reviewsOwlOptions" class="reviews-carousel" #reviewsCar>
         <ng-container *ngFor="let review of reviews">
@@ -230,6 +222,14 @@
           </ng-template>
         </ng-container>
       </owl-carousel-o>
+    </div>
+    <div class="reviews-arrows">
+      <a (click)="reviewsCar.prev()" class="move-backward">
+        <img src="assets/images/arrow_review.png" alt="prev arrow">
+      </a>
+      <a (click)="reviewsCar.next()" class="move-forward">
+        <img src="assets/images/arrow_review.png" alt="next arrow">
+      </a>
     </div>
   </div>
 </section>
