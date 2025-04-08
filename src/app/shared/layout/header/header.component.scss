@@ -64,6 +64,10 @@
         margin-right: 20px;
         min-width: 150px;
         align-items: center;
+
+        &.mobile {
+          display: none;
+        }
       }
 
       .header-menu-actions {

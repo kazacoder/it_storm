@@ -139,6 +139,10 @@
       .header-menu {
         grid-template-rows: 1fr 1fr;
 
+        .left-side {
+          justify-content: space-between;
+        }
+
         .right-side {
           flex-direction: column;
           gap: 10px;
@@ -146,9 +150,11 @@
           justify-content: center;
           text-align: center;
 
-          .header-menu-phone {
-            text-align: center;
-            display: block;
+        }
+        .header-menu-phone {
+          display: none;
+          &.mobile {
+            display: flex;
           }
         }
       }
