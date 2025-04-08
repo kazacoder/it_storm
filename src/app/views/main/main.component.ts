@@ -41,7 +41,17 @@ export class MainComponent implements OnInit {
     dots: false,
     navSpeed: 700,
     margin: 25,
-    items: 3,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      573: {
+        items: 2,
+      },
+      900: {
+        items: 3,
+      },
+    },
     nav: false,
   };
 
