@@ -1,8 +1,7 @@
 <header class="header">
-  <burger-menu></burger-menu>
-  <div class="container">
-    <div class="header-right">
-      <div class="header-menu">
+   <div class="container">
+    <div class="header-menu">
+      <div class="left-side">
         <a routerLink="/" class="logo">
           <img src="assets/images/logo.png" alt="">
         </a>
@@ -17,6 +16,9 @@
             <li><a routerLink="/" fragment="contacts">Контакты</a></li>
           </ul>
         </nav>
+        <burger-menu></burger-menu>
+      </div>
+      <div class="right-side">
         <a href="tel:+74993431334" class="header-menu-phone">+7 (499) 343-13-34</a>
         <div class="header-menu-actions">
           <a routerLink="/login" *ngIf="!userName">
