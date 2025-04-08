@@ -7,12 +7,4 @@ import { Component } from '@angular/core';
 })
 export class BurgerMenuComponent {
 
-  isOpen: boolean = false;
-
-  constructor() { }
-
-  toggleMEnu() {
-    this.isOpen = !this.isOpen;
-  }
-
 }
