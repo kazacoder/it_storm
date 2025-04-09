@@ -11,7 +11,7 @@
     <div *ngIf="data.type === 'order' || data.type === 'consultation'">
       <div class="common-dialog-title">{{ data.title }}</div>
       <div class="common-dialog-inputs inputs">
-        <div class="input" *ngIf="data.type === 'order'">
+        <div class="input dialog" *ngIf="data.type === 'order'">
           <select name="service" [(ngModel)]="formValues.service" [value]="data.service">
             <option value="Создание сайтов">Создание сайтов</option>
             <option value="Продвижение">Продвижение</option>
@@ -19,17 +19,17 @@
             <option value="Копирайтинг">Копирайтинг</option>
           </select>
         </div>
-        <div class="input">
+        <div class="input dialog">
           <input type="text" name="name" #name=ngModel [(ngModel)]="formValues.name" required placeholder="Ваше имя"
                  [ngStyle]="{'border-color': name.invalid && (name.touched || name.dirty) ? 'red' : ''}">
         </div>
-        <div class="input">
+        <div class="input dialog">
           <input type="text" name="phone" #phone="ngModel" [(ngModel)]="formValues.phone" required
                  placeholder="Ваш номер телефона" prefix="+7 " mask="(000) 000-0000"
                  [ngStyle]="{'border-color': phone.invalid && (phone.touched || phone.dirty) ? 'red' : ''}">
         </div>
       </div>
-      <div class="common-dialog-buttons" *ngIf="data.type === 'order' || data.type === 'consultation'">
+      <div class="common-dialog-buttons dialog" *ngIf="data.type === 'order' || data.type === 'consultation'">
         <button class="button button-big" [disabled]="name.invalid || phone.invalid"
                 (click)="sendRequest()">{{ data.btnText }}
         </button>

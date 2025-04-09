@@ -175,7 +175,7 @@ export class DetailComponent implements OnInit {
                   console.log(errorResponse.error.message);
                 }
               });
-              //update count Todo попробовать упростить код
+              //update count
               if (action === currentComment!.action && action === this.action.dislike) {
                 currentComment!.dislikesCount -= 1;
               }

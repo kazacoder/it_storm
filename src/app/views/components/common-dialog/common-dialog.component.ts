@@ -74,7 +74,6 @@ export class CommonDialogComponent implements OnInit {
 
 
 const commonDialogSize = {
-  // ToDo: need to realize adaptive size
   width: '727px',
   height: '489px',
 };
