@@ -76,3 +76,33 @@
   }
 }
 
+//000 - 529
+@media screen and (max-width: 529px) {
+  .common-dialog {
+    .common-dialog-wrapper {
+
+      .common-dialog-title {
+        font-size: 24px;
+      }
+
+      .common-dialog-inputs {
+        width: 100%;
+        .input {
+          width: calc(100% - 30px);
+        }
+      }
+
+      .common-dialog-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .button-big {
+          width: calc(100% - 30px);
+          padding: 15px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
