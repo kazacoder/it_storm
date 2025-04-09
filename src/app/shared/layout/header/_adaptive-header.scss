@@ -146,8 +146,8 @@
         .right-side {
           flex-direction: column;
           gap: 10px;
-          justify-self: center;
-          justify-content: center;
+          justify-self: end;
+          justify-content: flex-end;
           text-align: center;
 
         }
