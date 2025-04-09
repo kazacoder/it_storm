@@ -24,7 +24,7 @@
                  [ngStyle]="{'border-color': name.invalid && (name.touched || name.dirty) ? 'red' : ''}">
         </div>
         <div class="input dialog">
-          <input type="text" name="phone" #phone="ngModel" [(ngModel)]="formValues.phone" required
+          <input type="tel" name="phone" #phone="ngModel" [(ngModel)]="formValues.phone" required
                  placeholder="Ваш номер телефона" prefix="+7 " mask="(000) 000-0000"
                  [ngStyle]="{'border-color': phone.invalid && (phone.touched || phone.dirty) ? 'red' : ''}">
         </div>
